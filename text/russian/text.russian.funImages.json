@@ -1,0 +1,11 @@
+{
+  "lang": "Russian",
+  "text": [
+    { "tag": "FUN_IMAGES_ERROR_NO_IMAGE", "value": "Сервер не предоставил изображение." },
+
+    { "tag": "FUN_IMAGES_CAT_TITLE", "value": "Случайный кот" },
+    { "tag": "FUN_IMAGES_CAT_DESCRIPTION", "value": "Какой же он милый!" },
+    { "tag": "FUN_IMAGES_DOG_TITLE", "value": "Случайный пёс" },
+    { "tag": "FUN_IMAGES_DOG_DESCRIPTION", "value": "Какой же он крутой!" }
+  ]
+}

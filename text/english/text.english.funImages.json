@@ -1,0 +1,11 @@
+{
+  "lang": "English",
+  "text": [
+    { "tag": "FUN_IMAGES_ERROR_NO_IMAGE", "value": "Server didn't provide an image." },
+
+    { "tag": "FUN_IMAGES_CAT_TITLE", "value": "Random cat" },
+    { "tag": "FUN_IMAGES_CAT_DESCRIPTION", "value": "It's so cute!" },
+    { "tag": "FUN_IMAGES_DOG_TITLE", "value": "Random dog" },
+    { "tag": "FUN_IMAGES_DOG_DESCRIPTION", "value": "It's so cool!" }
+  ]
+}
