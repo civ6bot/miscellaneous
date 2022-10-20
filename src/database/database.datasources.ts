@@ -12,6 +12,13 @@ export const outerDataSource: DataSource = new DataSource({
     database: process.env.DATABASE_NAME,
     entities: [
         __dirname + "/entities/entity.Config.{js,ts}",
+
+        __dirname + "/entities/entity.Ban.{js,ts}",
+        __dirname + "/entities/entity.MuteChat.{js,ts}",
+        __dirname + "/entities/entity.MuteVoice.{js,ts}",
+
+        __dirname + "/entities/entity.Clan.{js,ts}",
+        __dirname + "/entities/entity.UserProfile.{js,ts}",
     ],
     charset: "utf8mb4_bin",
     logging: false,

@@ -56,8 +56,12 @@ localDataSource.initialize().then(async () => {
 
 outerDataSource.initialize().then(async () => {
     console.log(`Outer database started`);
-})
+});
 
 process.on('uncaughtException', error => {
     console.error(error);
 });
+
+setInterval(function() {
+    console.log('Memory usage:', process.memoryUsage());
+}, 3000);

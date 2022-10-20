@@ -1,0 +1,13 @@
+[
+  { "setting": "MODERATION_BAN_TIERS", "value": "1 2 3 5 7 14 30 60 365" },
+  { "setting": "MODERATION_BAN_TIER_DECREASE_DAYS", "value": 14 },
+
+  { "setting": "MODERATION_CHANNEL_ID", "value": "" },
+
+  { "setting": "MODERATION_ROLE_MODERATORS_ID", "value": "" },
+  { "setting": "MODERATION_ROLE_BAN_ID", "value": "" },
+  { "setting": "MODERATION_ROLE_MUTE_CHAT_ID", "value": "" },
+  { "setting": "MODERATION_ROLE_MUTE_VOICE_ID", "value": "" },
+
+  { "setting": "MODERATION_CLEAR_MAX", "value": 10 }
+]

@@ -1,0 +1,40 @@
+{
+  "lang": "English",
+  "text": [
+    { "tag": "MODERATION_ERROR_NO_PERMISSION", "value": "You don't have permission to use this command." },
+    { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "You need to specify role for this punishment. Use /config to change settings." },
+    { "tag": "MODERATION_ERROR_ROLE_UNKNOWN", "value": "Bot cannot give role for this punishment. Make sure that punishment role is exist and bot role has higher position in role list." },
+
+    { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "User hasn't punishment of this type." },
+    { "tag": "MODERATION_ERROR_NOT_PUNISHED_ANY", "value": "User hasn't any punishments." },
+
+    { "tag": "MODERATION_ERROR_BAN_TIER_MAX", "value": "User already has the highest T[TIER_LEVEL] ban tier." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Input value from 1 to [TIER_LEVEL_MAX]." },
+
+    { "tag": "MODERATION_ERROR_CLEAR_BOUNDS", "value": "Input value from 1 to [CLEAR_MAX]. Use /config to change settings." },
+
+    { "tag": "MODERATION_BAN_TITLE", "value": "\uD83D\uDD28 Ban" },
+    { "tag": "MODERATION_BAN_EXTENSION_TITLE", "value": "\uD83D\uDD28 Ban extension" },
+    { "tag": "MODERATION_BAN_TIER_TITLE", "value": "\uD83D\uDD28 Ban T[TIER_LEVEL]" },
+    { "tag": "MODERATION_MUTE_CHAT_TITLE", "value": "\uD83D\uDD28 Chat mute" },
+    { "tag": "MODERATION_MUTE_CHAT_EXTENSION_TITLE", "value": "\uD83D\uDD28 Chat mute extension" },
+    { "tag": "MODERATION_MUTE_VOICE_TITLE", "value": "\uD83D\uDD28 Voice mute" },
+    { "tag": "MODERATION_MUTE_VOICE_EXTENSION_TITLE", "value": "\uD83D\uDD28 Voice mute extension" },
+    { "tag": "MODERATION_UNBAN_TITLE", "value": "\uD83D\uDD28 Unban" },
+    { "tag": "MODERATION_UNMUTE_CHAT_TITLE", "value": "\uD83D\uDD28 Chat unmute" },
+    { "tag": "MODERATION_UNMUTE_VOICE_TITLE", "value": "\uD83D\uDD28 Voice unmute" },
+    { "tag": "MODERATION_PARDON_TITLE", "value": "\uD83D\uDD28 Pardon!" },
+    { "tag": "MODERATION_BAN_TIER_CHANGE", "value": "\uD83D\uDD28 Ban tier set" },
+
+    { "tag": "MODERATION_FIELD_USER_TITLE", "value": "User:" },
+    { "tag": "MODERATION_FIELD_DURATION_TITLE", "value": "Until:" },
+    { "tag": "MODERATION_FIELD_REASON_TITLE", "value": "Reason:" },
+    { "tag": "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "value": "—" },
+    { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_TITLE", "value": "Change:" },
+    { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_DESCRIPTION", "value": "T[TIER_BEFORE] → T[TIER_AFTER]" },
+    { "tag": "MODERATION_BOTTOM_AUTHOR", "value": "Moderator [USER_NICKNAME]" },
+    { "tag": "MODERATION_BOTTOM_TIMEOUT", "value": "Punishment time has expired" },
+
+    { "tag": "MODERATION_CLEAR_TITLE", "value": "\uD83D\uDDD1 Cleared [MESSAGES_AMOUNT] messages!" }
+  ]
+}

@@ -15,15 +15,4 @@ export class FeedbackUI extends ModuleBaseUI {
             imageURL
         );
     }
-
-    public feedback(title: string, description: string, field: APIEmbedField, signBottomText: string, signBottomImageUrl: string|null): EmbedBuilder[] {
-        return UtilsGeneratorEmbed.getSingle(
-            title,
-            "#FD91FF",
-            description,
-            [field],
-            signBottomText,
-            signBottomImageUrl
-        );
-    }
 }

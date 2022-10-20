@@ -4,6 +4,19 @@ import {ModuleBaseUI} from "../base/base.ui";
 import {UtilsServiceRandom} from "../../utils/services/utils.service.random";
 
 export class FunImagesUI extends ModuleBaseUI {
+    avatar(title: string, imageURL: string): EmbedBuilder[] {
+        return UtilsGeneratorEmbed.getSingle(
+            title,
+            UtilsServiceRandom.getBrightColor(),
+            null,
+            [],
+            null,
+            null,
+            null,
+            imageURL
+        );
+    }
+
     cat(title: string, description: string, imageURL: string): EmbedBuilder[] {
         let catEmojis = ["😼", "😹", "🙀", "😾", "😿", "😻", "😺", "😸", "😽", "🐱", "🐈"];
         return UtilsGeneratorEmbed.getSingle(

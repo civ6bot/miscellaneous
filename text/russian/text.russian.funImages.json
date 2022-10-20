@@ -2,7 +2,9 @@
   "lang": "Russian",
   "text": [
     { "tag": "FUN_IMAGES_ERROR_NO_IMAGE", "value": "Сервер не предоставил изображение." },
+    { "tag": "FUN_IMAGES_ERROR_NO_AVATAR", "value": "Пользователь не имеет изображения профиля." },
 
+    { "tag": "FUN_IMAGES_AVATAR_TITLE", "value": "\uD83D\uDC64 Аватар [USER_TAG]" },
     { "tag": "FUN_IMAGES_CAT_TITLE", "value": "Случайный кот" },
     { "tag": "FUN_IMAGES_CAT_DESCRIPTION", "value": "Какой же он милый!" },
     { "tag": "FUN_IMAGES_DOG_TITLE", "value": "Случайный пёс" },
