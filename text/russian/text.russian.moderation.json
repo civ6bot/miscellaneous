@@ -3,6 +3,7 @@
   "text": [
     { "tag": "MODERATION_ERROR_NO_PERMISSION", "value": "У вас нет роли или прав администратора для выполнения этой команды." },
     { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "Для этого типа наказания не назначена роль. Используйте команду /config для изменения настроек." },
+    { "tag": "MODERATION_ERROR_USER_NOT_FOUND", "value": "Пользователь не найден." },
     { "tag": "MODERATION_ERROR_ROLE_UNKNOWN", "value": "Бот не может выдать эту роль. Убедитесь, что выбранная в настройках роль существует и расположена ниже роли бота." },
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "У пользователя нет этого типа наказания." },

@@ -10,7 +10,7 @@ export class EntityUserPunishment {
     @Column({type: "number", default: 0})
     banTier!: number;
     @Column({type: "number", nullable: true, default: null})
-    timeBanEndLast!: number | null;
+    timeBanTierLastChange!: number | null;
 
     @Column({type: "number", nullable: true, default: null})
     timeBanStart!: number | null;

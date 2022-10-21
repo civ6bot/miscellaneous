@@ -46,5 +46,7 @@ export class ModerationUI extends ModuleBaseUI {
         );
     }
 
-
+    public clear(title: string): EmbedBuilder[] {
+        return UtilsGeneratorEmbed.getSingle(title, "#F4900C");
+    }
 }

@@ -61,11 +61,11 @@ export class DatabaseServiceUserPunishment {
         });
     }
 
-    public async getAllForTierDecreasing(days: number): Promise<EntityUserPunishment[]> {
+    public async getAllForTierDecreasing(): Promise<EntityUserPunishment[]> {
         return await this.database.findBy(EntityUserPunishment, {
             banTier: MoreThan(0),
-            timeBanEndLast: LessThanOrEqual(Date.now()-1000*3600*24*days),
-            timeBanStart: Not(IsNull())
+            timeBanStart: IsNull(),
+            timeBanTierLastChange: Not(IsNull())
         });
     }
 }

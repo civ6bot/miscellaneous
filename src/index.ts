@@ -7,6 +7,7 @@ import {loadTextEntities} from "./utils/loaders/utils.loader.text";
 import {DatabaseServiceConfig} from "./database/services/service.Config";
 import {loadDefaultConfigs} from "./utils/loaders/utils.loader.config";
 import {ActivityType} from "discord.js";
+import {ModerationService} from "./modules/moderation/moderation.service";
 
 dotenv.config({path: 'miscellaneous.env'});
 const isTesting: boolean = Boolean(Number(process.env.TEST_MODE) || 0);
@@ -55,7 +56,15 @@ localDataSource.initialize().then(async () => {
 });
 
 outerDataSource.initialize().then(async () => {
-    console.log(`Outer database started`);
+    console.log(`Outer database connected`);
+
+    setTimeout(async () => {
+        await ModerationService.banTierDecreaseTimeout();
+        setInterval(ModerationService.banTierDecreaseTimeout, 1000*60*60*24);
+    }, new Date().setHours(0, 0, 0, 0)+1000*60*60*24-Date.now());
+
+    await ModerationService.punishmentTimeout();
+    console.log("Moderation service timeouts initialized")
 });
 
 process.on('uncaughtException', error => {
@@ -64,4 +73,4 @@ process.on('uncaughtException', error => {
 
 setInterval(function() {
     console.log('Memory usage:', process.memoryUsage());
-}, 3000);
+}, 5000);

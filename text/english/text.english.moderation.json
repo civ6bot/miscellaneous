@@ -3,6 +3,7 @@
   "text": [
     { "tag": "MODERATION_ERROR_NO_PERMISSION", "value": "You don't have permission to use this command." },
     { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "You need to specify role for this punishment. Use /config to change settings." },
+    { "tag": "MODERATION_ERROR_USER_NOT_FOUND", "value": "User not found." },
     { "tag": "MODERATION_ERROR_ROLE_UNKNOWN", "value": "Bot cannot give role for this punishment. Make sure that punishment role is exist and bot role has higher position in role list." },
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "User hasn't punishment of this type." },
