@@ -22,7 +22,7 @@ export const outerDataSource: DataSource = new DataSource({
     ],
     charset: "utf8mb4_bin",
     logging: false,
-    synchronize: false   // поменять на false
+    synchronize: true
 });
 
 export const localDataSource: DataSource = new DataSource({
