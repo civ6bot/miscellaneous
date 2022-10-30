@@ -1,16 +1,18 @@
 {
   "lang": "English",
   "text": [
+    { "tag": "MODERATION_ERROR_BOT_NO_PERMISSION", "value": "Bot hasn't role permission to do that." },
     { "tag": "MODERATION_ERROR_NO_PERMISSION", "value": "You don't have permission to use this command." },
-    { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "You need to specify role for this punishment. Use /config to change settings." },
+    { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "You need to specify role for this punishment. Make sure that punishment role is exist and bot role has higher position in role list.\nUse /config to change settings." },
     { "tag": "MODERATION_ERROR_USER_NOT_FOUND", "value": "User not found." },
-    { "tag": "MODERATION_ERROR_ROLE_UNKNOWN", "value": "Bot cannot give role for this punishment. Make sure that punishment role is exist and bot role has higher position in role list." },
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "User hasn't punishment of this type." },
     { "tag": "MODERATION_ERROR_NOT_PUNISHED_ANY", "value": "User hasn't any punishments." },
 
     { "tag": "MODERATION_ERROR_BAN_TIER_MAX", "value": "User already has the highest T[TIER_LEVEL] ban tier." },
-    { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Input value from 1 to [TIER_LEVEL_MAX]." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Input value from 0 to [TIER_LEVEL_MAX]." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_SAME", "value": "User has this ban tier level already." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_RESET_ALL_NO_USERS", "value": "Users with positive ban tier level not found." },
 
     { "tag": "MODERATION_ERROR_CLEAR_BOUNDS", "value": "Input value from 1 to [CLEAR_MAX]. Use /config to change settings." },
 
@@ -33,9 +35,15 @@
     { "tag": "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "value": "—" },
     { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_TITLE", "value": "Change:" },
     { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_DESCRIPTION", "value": "T[TIER_BEFORE] → T[TIER_AFTER]" },
-    { "tag": "MODERATION_BOTTOM_AUTHOR", "value": "Moderator [USER_NICKNAME]" },
+    { "tag": "MODERATION_BOTTOM_AUTHOR", "value": "Moderator" },
     { "tag": "MODERATION_BOTTOM_TIMEOUT", "value": "Punishment time has expired" },
 
-    { "tag": "MODERATION_CLEAR_TITLE", "value": "\uD83D\uDDD1 Cleared [MESSAGES_AMOUNT] messages!" }
+    { "tag": "MODERATION_CLEAR_TITLE", "value": "\uD83D\uDDD1 Cleared [MESSAGES_AMOUNT] messages!" },
+
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_TITLE", "value": "\uD83D\uDDD1 Ban tier reset" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION", "value": "This command will set ban levels to zero for [USERS_AMOUNT] users.\n\n❗ **This action cannot be undone!**" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CONFIRM", "value": "Confirm" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CANCEL", "value": "Cancel" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Ban levels have been reset for [USERS_AMOUNT] users." }
   ]
 }

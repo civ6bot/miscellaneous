@@ -1,16 +1,18 @@
 {
   "lang": "Russian",
   "text": [
+    { "tag": "MODERATION_ERROR_BOT_NO_PERMISSION", "value": "Бот не имеет прав ролей, чтобы выполнить эту команду." },
     { "tag": "MODERATION_ERROR_NO_PERMISSION", "value": "У вас нет роли или прав администратора для выполнения этой команды." },
-    { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "Для этого типа наказания не назначена роль. Используйте команду /config для изменения настроек." },
+    { "tag": "MODERATION_ERROR_ROLE_MISSING_CONFIG", "value": "Для этого типа наказания не назначена роль. Убедитесь, что выбранная в настройках роль существует и расположена ниже роли бота.\nИспользуйте команду /config для изменения настроек." },
     { "tag": "MODERATION_ERROR_USER_NOT_FOUND", "value": "Пользователь не найден." },
-    { "tag": "MODERATION_ERROR_ROLE_UNKNOWN", "value": "Бот не может выдать эту роль. Убедитесь, что выбранная в настройках роль существует и расположена ниже роли бота." },
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "У пользователя нет этого типа наказания." },
     { "tag": "MODERATION_ERROR_NOT_PUNISHED_ANY", "value": "У пользователя нет наказаний." },
 
     { "tag": "MODERATION_ERROR_BAN_TIER_MAX", "value": "Игрок уже имеет максимальный T[TIER_LEVEL] уровень бана." },
-    { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Введите значение уровня бана от 1 до [TIER_LEVEL_MAX]." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Введите значение уровня бана от 0 до [TIER_LEVEL_MAX]." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_SAME", "value": "Пользователь уже имеет этот уровень бана." },
+    { "tag": "MODERATION_ERROR_BAN_TIER_RESET_ALL_NO_USERS", "value": "Пользователей с ненулевым уровнем бана не обнаружено." },
 
     { "tag": "MODERATION_ERROR_CLEAR_BOUNDS", "value": "Введите значение от 1 до [CLEAR_MAX]. Используйте /config, чтобы поменять максимальное значение в настройках сервера." },
 
@@ -33,9 +35,15 @@
     { "tag": "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "value": "—" },
     { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_TITLE", "value": "Изменение:" },
     { "tag": "MODERATION_FIELD_BAN_TIER_CHANGE_DESCRIPTION", "value": "T[TIER_BEFORE] → T[TIER_AFTER]" },
-    { "tag": "MODERATION_BOTTOM_AUTHOR", "value": "Модератор [USER_NICKNAME]" },
+    { "tag": "MODERATION_BOTTOM_AUTHOR", "value": "Модератор" },
     { "tag": "MODERATION_BOTTOM_TIMEOUT", "value": "Время наказания истекло" },
 
-    { "tag": "MODERATION_CLEAR_TITLE", "value": "\uD83D\uDDD1 Удалено [MESSAGES_AMOUNT] сообщений!" }
+    { "tag": "MODERATION_CLEAR_TITLE", "value": "\uD83D\uDDD1 Удалено [MESSAGES_AMOUNT] сообщений!" },
+
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_TITLE", "value": "\uD83D\uDDD1 Сброс уровней банов" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION", "value": "Эта команда обнулит уровень банов для [USERS_AMOUNT] игроков.\n\n❗ **Это действие нельзя отменить!**" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CONFIRM", "value": "Подтвердить" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CANCEL", "value": "Отмена" },
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Уровни банов были успешно сброшены для [USERS_AMOUNT] игроков." }
   ]
 }

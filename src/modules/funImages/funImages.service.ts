@@ -15,7 +15,7 @@ export class FunImagesService extends ModuleBaseService {
 
     public async avatar(interaction: CommandInteraction, member: GuildMember | null) {
         let currentMember: GuildMember = member || interaction.member as GuildMember;
-        let imageURL: string | null = currentMember.user.avatarURL();
+        let imageURL: string | null = currentMember.user.avatarURL({size: 2048});
         if(imageURL === null) {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "FUN_IMAGES_ERROR_NO_AVATAR"

@@ -25,34 +25,33 @@ export class DatabaseServiceUserPunishment {
 
     public async getAllExpired(): Promise<EntityUserPunishment[]> {
         return await this.database.findBy(EntityUserPunishment, [
-            {timeBanEnd: LessThanOrEqual(Date.now())},
-            {timeMuteChatEnd: LessThanOrEqual(Date.now())},
-            {timeMuteVoiceEnd: LessThanOrEqual(Date.now())}
+            {timeBanEnd: LessThanOrEqual(new Date())},
+            {timeMuteChatEnd: LessThanOrEqual(new Date())},
+            {timeMuteVoiceEnd: LessThanOrEqual(new Date())}
         ]);
     }
 
-    public async getNextExpiringTime(): Promise<number|null> {
-        let nextExpiringEntities: (EntityUserPunishment|null)[] = [
-            await this.database.findOne(EntityUserPunishment,{order: { timeBanEnd: "asc" }}),
-            await this.database.findOne(EntityUserPunishment,{order: { timeMuteChatEnd: "asc" }}),
-            await this.database.findOne(EntityUserPunishment,{order: { timeMuteVoiceEnd: "asc" }}),
-        ];
-        let minTime: (number|null)[] = [
-            nextExpiringEntities[0]?.timeBanEnd || null,
-            nextExpiringEntities[0]?.timeMuteChatEnd || null,
-            nextExpiringEntities[0]?.timeMuteVoiceEnd || null,
-        ];
-        return (minTime.every(time => time === null))
-            ? null
-            : minTime[
-                minTime.indexOf(
-                    Math.min(
-                        ...minTime
-                            .filter((time: number|null): boolean => (time !== null))
-                            .map((time: number|null): number => time as number)
-                    )
-                )
-            ];
+    public async getNextExpiringTime(): Promise<Date|null> {
+        let dateArray: Date[] = [
+            (await this.database.findOne(EntityUserPunishment, {
+                where: { timeBanEnd: Not(IsNull()) },
+                order: { timeMuteChatEnd: "asc" },
+            }))?.timeBanEnd,
+            (await this.database.findOne(EntityUserPunishment,{
+                where: { timeMuteChatEnd: Not(IsNull()) },
+                order: { timeMuteChatEnd: "asc" }
+            }))?.timeMuteChatEnd,
+            (await this.database.findOne(EntityUserPunishment,{
+                where: { timeMuteVoiceEnd: Not(IsNull()) },
+                order: { timeMuteVoiceEnd: "asc" }
+            }))?.timeMuteVoiceEnd
+        ].filter(date => !!date)
+            .map((date: Date|null|undefined): Date => date as Date)
+        console.log("getNextExpiringTime, dateArray: ", dateArray);
+        if(dateArray.length === 0)
+            return null;
+        let timeArray: number[] = dateArray.map(date => date.getTime());
+        return dateArray[timeArray.indexOf(Math.min(...timeArray))];
     }
 
     public async getAllWithBanTier(): Promise<EntityUserPunishment[]> {

@@ -1,7 +1,6 @@
-import {Discord, Slash} from "discordx";
+import {Discord, Slash, SlashOption} from "discordx";
 import {ApplicationCommandOptionType, CommandInteraction, GuildMember} from "discord.js";
 import {FunImagesService} from "./funImages.service";
-import {SlashOption} from "discordx/build/esm";
 
 @Discord()
 export abstract class FunImagesInteractions {

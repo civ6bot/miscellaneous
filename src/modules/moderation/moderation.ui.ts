@@ -1,9 +1,10 @@
-import {APIEmbedField, EmbedBuilder, User} from "discord.js";
+import {ActionRowBuilder, APIEmbedField, ButtonBuilder, ButtonStyle, EmbedBuilder, User} from "discord.js";
 import {UtilsGeneratorEmbed} from "../../utils/generators/utils.generator.embed";
 import {ModuleBaseUI} from "../base/base.ui";
+import {UtilsGeneratorButton} from "../../utils/generators/utils.generator.button";
 
 export class ModerationUI extends ModuleBaseUI {
-    public punishment(
+    public punishmentEmbed(
         title: string,
         fieldPlayerTitle: string, userID: string,
         fieldDurationOrChangeTitle: string, fieldDurationOrChangeDescription: string,
@@ -24,7 +25,7 @@ export class ModerationUI extends ModuleBaseUI {
         );
     }
 
-    public riddance(
+    public riddanceEmbed(
         title: string,
         fieldPlayerTitle: string, userID: string,
         fieldReasonTitle: string | null, fieldReasonDescription: string | null,
@@ -41,12 +42,21 @@ export class ModerationUI extends ModuleBaseUI {
             "#9FCFF9",
             null,
             fields,
-            (author !== null) ? `${bottomText} ${author.tag}` : bottomText,
+            author ? `${bottomText} ${author.tag}` : bottomText,
             author?.avatarURL() || null
         );
     }
 
-    public clear(title: string): EmbedBuilder[] {
+    public clearEmbed(title: string): EmbedBuilder[] {
         return UtilsGeneratorEmbed.getSingle(title, "#F4900C");
+    }
+
+    public banTierResetAllButtons(labels: string[], emojis: string[]): ActionRowBuilder<ButtonBuilder>[] {
+        return UtilsGeneratorButton.getList(
+            labels,
+            emojis,
+            [ButtonStyle.Success, ButtonStyle.Danger],
+            ["moderation-ban-tier-reset-all-confirm",  "moderation-ban-tier-reset-all-cancel"]
+        );
     }
 }

@@ -1,5 +1,5 @@
-import {Discord, Slash, SlashChoice, SlashGroup, SlashOption} from "discordx";
-import {ApplicationCommandOptionType, CommandInteraction, GuildMember} from "discord.js";
+import {Discord, Slash, SlashChoice, SlashGroup, SlashOption, ButtonComponent} from "discordx";
+import {ApplicationCommandOptionType, ButtonInteraction, CommandInteraction, GuildMember} from "discord.js";
 import {ModerationService} from "./moderation.service";
 
 @Discord()
@@ -14,12 +14,11 @@ export abstract class ModerationInteractions{
             type: ApplicationCommandOptionType.User,
             required: true,
         }) member: GuildMember,
-        @SlashChoice("seconds", "s")
-        @SlashChoice("minutes", "m")
-        @SlashChoice("hours", "h")
-        @SlashChoice("days", "d")
+        @SlashChoice({name: "minutes", value: "m"})
+        @SlashChoice({name: "hours", value: "h"})
+        @SlashChoice({name: "days", value: "d"})
         @SlashOption({
-            name: "time",
+            name: "time-unit",
             description: "time unit",
             type: ApplicationCommandOptionType.String,
             required: true
@@ -38,6 +37,23 @@ export abstract class ModerationInteractions{
         }) reason: string = "",
         interaction: CommandInteraction
     ){ await this.moderationService.ban(interaction, member, timeType, timeAmount, reason) }
+
+    @Slash({name: "ban-tier", description: "Ban user by time tiers"})
+    async banTier(
+        @SlashOption({
+            name: "user",
+            description: "user to ban",
+            type: ApplicationCommandOptionType.User,
+            required: true,
+        }) member: GuildMember,
+        @SlashOption({
+            name: "reason",
+            description: "description",
+            type: ApplicationCommandOptionType.String,
+            required: false
+        }) reason: string = "",
+        interaction: CommandInteraction
+    ){ await this.moderationService.banTierBan(interaction, member, reason) }
 
     @Slash({name: "unban", description: "Unban user"})
     async unban(
@@ -83,30 +99,23 @@ export abstract class ModerationInteractions{
         }) clearAmount: number,
         interaction: CommandInteraction
     ) { await this.moderationService.clear(interaction, clearAmount) }
+
+    @ButtonComponent({id: "moderation-ban-tier-reset-all-confirm"})
+    async banTierResetAllButtonConfirm(
+        interaction: ButtonInteraction
+    ) { await this.moderationService.banTierResetAllButtonConfirm(interaction) }
+
+    @ButtonComponent({id: "moderation-ban-tier-reset-all-cancel"})
+    async banTierResetAllButtonCancel(
+        interaction: ButtonInteraction
+    ) { await this.moderationService.banTierResetAllButtonCancel(interaction) }
 }
 
 @Discord()
-@SlashGroup({name: "ban-tier", description: "Ban tier commands"})
-@SlashGroup("ban-tier")
+@SlashGroup({name: "ban-tier-levels", description: "Ban tier commands"})
+@SlashGroup("ban-tier-levels")
 export abstract class ModerationBanTierInteractions {
     private moderationService: ModerationService = new ModerationService();
-
-    @Slash({name: "ban", description: "Ban user by time tiers"})
-    async banTier(
-        @SlashOption({
-            name: "user",
-            description: "user to ban",
-            type: ApplicationCommandOptionType.User,
-            required: true,
-        }) member: GuildMember,
-        @SlashOption({
-            name: "reason",
-            description: "description",
-            type: ApplicationCommandOptionType.String,
-            required: false
-        }) reason: string = "",
-        interaction: CommandInteraction
-    ){ await this.moderationService.banTierBan(interaction, member, reason) }
 
     @Slash({name: "set", description: "Set new ban tier for user"})
     async banTierSet(
@@ -136,9 +145,9 @@ export abstract class ModerationBanTierInteractions {
 @SlashGroup({
     name: "reset",
     description: "Reset ban tier for specify user or all users",
-    root: "ban-tier"
+    root: "ban-tier-levels"
 })
-@SlashGroup("reset", "ban-tier")
+@SlashGroup("reset", "ban-tier-levels")
 export abstract class ModerationBanTierResetInteractions {
     private moderationService: ModerationService = new ModerationService();
 
@@ -179,12 +188,11 @@ export abstract class ModerationMuteInteractions {
             type: ApplicationCommandOptionType.User,
             required: true,
         }) member: GuildMember,
-        @SlashChoice("seconds", "s")
-        @SlashChoice("minutes", "m")
-        @SlashChoice("hours", "h")
-        @SlashChoice("days", "d")
+        @SlashChoice({name: "minutes", value: "m"})
+        @SlashChoice({name: "hours", value: "h"})
+        @SlashChoice({name: "days", value: "d"})
         @SlashOption({
-            name: "time",
+            name: "time-unit",
             description: "time unit",
             type: ApplicationCommandOptionType.String,
             required: true
@@ -212,12 +220,11 @@ export abstract class ModerationMuteInteractions {
             type: ApplicationCommandOptionType.User,
             required: true,
         }) member: GuildMember,
-        @SlashChoice("seconds", "s")
-        @SlashChoice("minutes", "m")
-        @SlashChoice("hours", "h")
-        @SlashChoice("days", "d")
+        @SlashChoice({name: "minutes", value: "m"})
+        @SlashChoice({name: "hours", value: "h"})
+        @SlashChoice({name: "days", value: "d"})
         @SlashOption({
-            name: "time",
+            name: "time-unit",
             description: "time unit",
             type: ApplicationCommandOptionType.String,
             required: true

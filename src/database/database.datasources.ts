@@ -1,6 +1,5 @@
 import { DataSource } from "typeorm"
 import * as dotenv from "dotenv";
-
 dotenv.config({path: 'miscellaneous.env'});
 
 export const outerDataSource: DataSource = new DataSource({
@@ -13,12 +12,9 @@ export const outerDataSource: DataSource = new DataSource({
     entities: [
         __dirname + "/entities/entity.Config.{js,ts}",
 
-        __dirname + "/entities/entity.Ban.{js,ts}",
-        __dirname + "/entities/entity.MuteChat.{js,ts}",
-        __dirname + "/entities/entity.MuteVoice.{js,ts}",
-
         __dirname + "/entities/entity.Clan.{js,ts}",
         __dirname + "/entities/entity.UserProfile.{js,ts}",
+        __dirname + "/entities/entity.UserPunishment.{js,ts}",
     ],
     charset: "utf8mb4_bin",
     logging: false,
@@ -27,7 +23,7 @@ export const outerDataSource: DataSource = new DataSource({
 
 export const localDataSource: DataSource = new DataSource({
     type: "sqlite",
-    database: __dirname + "/../../database.sqlite",
+    database: __dirname + "/../../localDatabase.sqlite",
     entities: [
         __dirname + "/entities/entity.Config.{js,ts}",
         __dirname + "/entities/entity.Text.{js,ts}"

@@ -1,6 +1,6 @@
 import {Discord, Slash} from "discordx";
-import {FeedbackService} from "./feedback.service";
 import {ApplicationCommandOptionType, CommandInteraction} from "discord.js";
+import {FeedbackService} from "./feedback.service";
 
 @Discord()
 export abstract class FeedbackInteractions{
