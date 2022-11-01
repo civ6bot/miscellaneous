@@ -1,4 +1,4 @@
-import {ButtonInteraction, CommandInteraction, EmbedBuilder, Guild, GuildMember, Message, TextChannel} from "discord.js";
+import {ButtonInteraction, CommandInteraction, EmbedBuilder, Guild, GuildMember, TextChannel} from "discord.js";
 import {ModuleBaseService} from "../base/base.service";
 import {ModerationUI} from "./moderation.ui";
 import {DatabaseServiceUserPunishment} from "../../database/services/service.UserPunishment";

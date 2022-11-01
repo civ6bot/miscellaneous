@@ -2,12 +2,12 @@
   { "setting": "MODERATION_BAN_TIERS", "value": "1 2 3 5 7 14 30 60 365" },
   { "setting": "MODERATION_BAN_TIER_DECREASE_DAYS", "value": 14 },
 
-  { "setting": "MODERATION_CHANNEL_ID", "value": "1035558139719856269" },
+  { "setting": "MODERATION_CHANNEL_ID", "value": "" },
 
   { "setting": "MODERATION_ROLE_MODERATORS_ID", "value": "" },
-  { "setting": "MODERATION_ROLE_BAN_ID", "value": "1034928347542728814" },
-  { "setting": "MODERATION_ROLE_MUTE_CHAT_ID", "value": "1034928383664070727" },
-  { "setting": "MODERATION_ROLE_MUTE_VOICE_ID", "value": "1034928427364524203" },
+  { "setting": "MODERATION_ROLE_BAN_ID", "value": "" },
+  { "setting": "MODERATION_ROLE_MUTE_CHAT_ID", "value": "" },
+  { "setting": "MODERATION_ROLE_MUTE_VOICE_ID", "value": "" },
 
   { "setting": "MODERATION_CLEAR_MAX", "value": 10 }
 ]
