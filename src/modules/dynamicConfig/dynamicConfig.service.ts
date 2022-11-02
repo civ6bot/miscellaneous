@@ -5,9 +5,15 @@ import {
     DynamicConfig,
     DynamicConfigEntity,
     DynamicConfigEntityBoolean,
-    DynamicConfigEntityBooleanGameSetting, DynamicConfigEntityBooleanLanguage, DynamicConfigEntityChannelMany,
-    DynamicConfigEntityNumber, DynamicConfigEntityNumberMany, DynamicConfigEntityRoleMany,
-    DynamicConfigEntityString, DynamicConfigEntityTeamersForbiddenPairs
+    DynamicConfigEntityBooleanGameSetting,
+    DynamicConfigEntityBooleanLanguage,
+    DynamicConfigEntityChannelMany,
+    DynamicConfigEntityNumber,
+    DynamicConfigEntityNumberMany,
+    DynamicConfigEntityNumberTimeSeconds,
+    DynamicConfigEntityRoleMany,
+    DynamicConfigEntityString,
+    DynamicConfigEntityTeamersForbiddenPairs
 } from "./dynamicConfig.models";
 import {
     JSONDynamicConfigEntityBoolean,
@@ -15,7 +21,7 @@ import {
     JSONDynamicConfigEntityBooleanLanguage,
     JSONDynamicConfigEntityChannelMany,
     JSONDynamicConfigEntityNumber,
-    JSONDynamicConfigEntityNumberMany,
+    JSONDynamicConfigEntityNumberMany, JSONDynamicConfigEntityNumberTimeSeconds,
     JSONDynamicConfigEntityRoleMany,
     JSONDynamicConfigEntityString,
     JSONDynamicConfigEntityTeamersForbiddenPairs
@@ -105,18 +111,18 @@ export class DynamicConfigService extends ModuleBaseService {
                 ]
             });
         else await dynamicConfig.interaction.editReply({
-                embeds: this.dynamicConfigUI.configEmbed(
-                    dynamicConfig,
-                    textStrings[0], textStrings[1], textStrings[2], textStrings[3],
-                    emojiStrings,
-                    optionStrings,
-                    textStrings[4]
-                ),
-                components: [
-                    ...this.dynamicConfigUI.configButtons(dynamicConfig, buttonStrings),
-                    ...this.dynamicConfigUI.configMenu(placeholderString, optionStrings, emojiStrings)
-                ]
-            });
+            embeds: this.dynamicConfigUI.configEmbed(
+                dynamicConfig,
+                textStrings[0], textStrings[1], textStrings[2], textStrings[3],
+                emojiStrings,
+                optionStrings,
+                textStrings[4]
+            ),
+            components: [
+                ...this.dynamicConfigUI.configButtons(dynamicConfig, buttonStrings),
+                ...this.dynamicConfigUI.configMenu(placeholderString, optionStrings, emojiStrings)
+            ]
+        });
     }
 
     protected updateTimeoutTimer(dynamicConfig: DynamicConfig): void {
@@ -163,6 +169,32 @@ export class DynamicConfigService extends ModuleBaseService {
                     let dynamicConfigEntityTeamersForbiddenPairs: DynamicConfigEntityTeamersForbiddenPairs = entities[i] as DynamicConfigEntityTeamersForbiddenPairs;
                     dynamicConfigEntityTeamersForbiddenPairs.value = await this.getOneSettingString("DEFAULT", dynamicConfigEntityTeamersForbiddenPairs.properties.configTag);
                     entities[i] = dynamicConfigEntityTeamersForbiddenPairs;
+                    break;
+                case "NumberMany":
+                    let dynamicConfigEntityNumberMany: DynamicConfigEntityNumberMany = entities[i] as DynamicConfigEntityNumberMany;
+                    dynamicConfigEntityNumberMany.value = (await this.getOneSettingString("DEFAULT", dynamicConfigEntityNumberMany.properties.configTag))
+                        .split(" ")
+                        .map(str => Number(str));
+                    entities[i] = dynamicConfigEntityNumberMany;
+                    break;
+                case "RoleMany":
+                    let dynamicConfigEntityRoleMany: DynamicConfigEntityRoleMany = entities[i] as DynamicConfigEntityRoleMany;
+                    dynamicConfigEntityRoleMany.value = (await this.getOneSettingString("DEFAULT", dynamicConfigEntityRoleMany.properties.configTag))
+                        .split(" ")
+                        .filter(str => str !== "");
+                    entities[i] = dynamicConfigEntityRoleMany;
+                    break;
+                case "ChannelMany":
+                    let dynamicConfigEntityChannelMany: DynamicConfigEntityChannelMany = entities[i] as DynamicConfigEntityChannelMany;
+                    dynamicConfigEntityChannelMany.value = (await this.getOneSettingString("DEFAULT", dynamicConfigEntityChannelMany.properties.configTag))
+                        .split(" ")
+                        .filter(str => str !== "");
+                    entities[i] = dynamicConfigEntityChannelMany;
+                    break;
+                case "NumberTimeSeconds":
+                    let dynamicConfigEntityNumberTimeSeconds: DynamicConfigEntityNumberTimeSeconds = entities[i] as DynamicConfigEntityNumberTimeSeconds;
+                    dynamicConfigEntityNumberTimeSeconds.value = await this.getOneSettingNumber("DEFAULT", dynamicConfigEntityNumberTimeSeconds.properties.configTag);
+                    entities[i] = dynamicConfigEntityNumberTimeSeconds;
                     break;
             }
         await this.updateManyDynamicConfigEntity(interaction, entities);
@@ -220,6 +252,11 @@ export class DynamicConfigService extends ModuleBaseService {
                     tags.push(dynamicConfigEntityChannelMany.properties.configTag);
                     values.push(dynamicConfigEntityChannelMany.value.join(" "));
                     break;
+                case "NumberTimeSeconds":
+                    let dynamicConfigEntityNumberTimeSeconds: DynamicConfigEntityNumberTimeSeconds = entities[i] as DynamicConfigEntityNumberTimeSeconds;
+                    tags.push(dynamicConfigEntityNumberTimeSeconds.properties.configTag);
+                    values.push(String(dynamicConfigEntityNumberTimeSeconds.value*1000));
+                    break;
             }
         await this.updateManySetting(interaction, tags, values);
     }
@@ -234,6 +271,7 @@ export class DynamicConfigService extends ModuleBaseService {
             |JSONDynamicConfigEntityNumberMany
             |JSONDynamicConfigEntityRoleMany
             |JSONDynamicConfigEntityChannelMany
+            |JSONDynamicConfigEntityNumberTimeSeconds
             )[],
         dynamicConfig: DynamicConfig
     ): Promise<DynamicConfigEntity[]> {
@@ -298,6 +336,12 @@ export class DynamicConfigService extends ModuleBaseService {
                     dynamicConfigEntities.push(new DynamicConfigEntityChannelMany(
                         config as JSONDynamicConfigEntityChannelMany,
                         await this.getOneSettingString(dynamicConfig.interaction, config.configTag)
+                    ));
+                    break;
+                case "NumberTimeSeconds":
+                    dynamicConfigEntities.push(new DynamicConfigEntityNumberTimeSeconds(
+                        config as JSONDynamicConfigEntityNumberTimeSeconds,
+                        await this.getOneSettingNumber(dynamicConfig.interaction, config.configTag)
                     ));
                     break;
                 default:
@@ -365,14 +409,16 @@ export class DynamicConfigService extends ModuleBaseService {
 
         // Последняя категория, получили конфигурацию
         let configs: (JSONDynamicConfigEntityNumber
-            |JSONDynamicConfigEntityString
-            |JSONDynamicConfigEntityBoolean
-            |JSONDynamicConfigEntityBooleanGameSetting
-            |JSONDynamicConfigEntityTeamersForbiddenPairs
-            |JSONDynamicConfigEntityBooleanLanguage
-            |JSONDynamicConfigEntityNumberMany
-            |JSONDynamicConfigEntityRoleMany
-            |JSONDynamicConfigEntityChannelMany)[]
+                |JSONDynamicConfigEntityString
+                |JSONDynamicConfigEntityBoolean
+                |JSONDynamicConfigEntityBooleanGameSetting
+                |JSONDynamicConfigEntityTeamersForbiddenPairs
+                |JSONDynamicConfigEntityBooleanLanguage
+                |JSONDynamicConfigEntityNumberMany
+                |JSONDynamicConfigEntityRoleMany
+                |JSONDynamicConfigEntityChannelMany
+                |JSONDynamicConfigEntityNumberTimeSeconds
+                )[]
             |undefined = configsMap.get(dynamicConfig.getOptionTags()[valueIndex]);
         // Настройка для изменения языка, нужно смотреть локальную БД для отображения списка
         if(dynamicConfig.getOptionTags()[valueIndex] === "DYNAMIC_CONFIG_LANGUAGE")
@@ -391,10 +437,10 @@ export class DynamicConfigService extends ModuleBaseService {
                 )).map((text: string, index: number): {text: string, config: JSONDynamicConfigEntityBoolean} => {
                     return {text: text, config: configs?.[index] as JSONDynamicConfigEntityBoolean}
                 }).sort((
-                    a: {text: string, config: JSONDynamicConfigEntityBoolean},
-                    b: {text: string, config: JSONDynamicConfigEntityBoolean}
-                ) =>
-                    a.text.localeCompare(b.text)
+                        a: {text: string, config: JSONDynamicConfigEntityBoolean},
+                        b: {text: string, config: JSONDynamicConfigEntityBoolean}
+                    ) =>
+                        a.text.localeCompare(b.text)
                 ).map(pair => pair.config);
             let dynamicConfigEntities: DynamicConfigEntity[] = await this.createDynamicConfigEntities(configs, dynamicConfig);
             dynamicConfig.createChild(valueIndex, [], dynamicConfigEntities);
@@ -555,6 +601,21 @@ export class DynamicConfigService extends ModuleBaseService {
             return;
         }
 
+        if(dynamicConfigEntity.type === "NumberTimeSeconds") {
+            let dynamicConfigEntityNumberTimeSeconds: DynamicConfigEntityNumberTimeSeconds = dynamicConfigEntity as DynamicConfigEntityNumberTimeSeconds;
+            let textStrings: string[] = await this.getManyText(dynamicConfig.interaction, [
+                dynamicConfigEntityNumberTimeSeconds.properties.textTag, dynamicConfigEntityNumberTimeSeconds.properties.textTag+"_EMOJI",
+                "DYNAMIC_CONFIG_MODAL_LABEL"
+            ]);
+            await interaction.showModal(this.dynamicConfigUI.configModal(
+                `${textStrings[1] + " "}${textStrings[0]}`,
+                String(valueIndex),
+                textStrings[2],
+                dynamicConfigEntity.stringifiedValue
+            ));
+            return;
+        }
+
         // Если ничего не совпало, то ничего не делать
         await interaction.reply({content: `Menu is not implemented. Index=${valueIndex}.`, ephemeral: true});
     }
@@ -580,7 +641,7 @@ export class DynamicConfigService extends ModuleBaseService {
             if(!dynamicConfigEntityNumber.check(value)) {
                 let textStrings: string[] = await this.getManyText(interaction, [
                     "BASE_ERROR_TITLE", "DYNAMIC_CONFIG_ERROR_TYPE_NUMBER"], [
-                        null, [dynamicConfigEntityNumber.properties.minValue, dynamicConfigEntityNumber.properties.maxValue]
+                    null, [dynamicConfigEntityNumber.properties.minValue, dynamicConfigEntityNumber.properties.maxValue]
                 ]);
                 await interaction.reply({embeds: this.dynamicConfigUI.error(textStrings[0], textStrings[1]), ephemeral: true});
                 await this.sendDynamicConfigMessage(dynamicConfig);
@@ -624,9 +685,9 @@ export class DynamicConfigService extends ModuleBaseService {
                     ));
                 else if(dynamicConfigEntityEntityTeamersForbiddenPairs.civilizationErrorIndexes.length === 3)
                     textStrings.push(await this.getOneText(interaction, "DYNAMIC_CONFIG_ERROR_TYPE_TEAMERS_FORBIDDEN_PAIRS_TRIANGLE",
-                        dynamicConfigEntityEntityTeamersForbiddenPairs.civilizationErrorIndexes.map((value: number): string =>
-                            dynamicConfigEntityEntityTeamersForbiddenPairs.civilizationTexts[value]).join("\n"),
-                        value
+                            dynamicConfigEntityEntityTeamersForbiddenPairs.civilizationErrorIndexes.map((value: number): string =>
+                                dynamicConfigEntityEntityTeamersForbiddenPairs.civilizationTexts[value]).join("\n"),
+                            value
                         )
                     );
                 else textStrings.push(await this.getOneText(interaction, "DYNAMIC_CONFIG_ERROR_TYPE_TEAMERS_FORBIDDEN_PAIRS_PARSE", value));
@@ -706,6 +767,26 @@ export class DynamicConfigService extends ModuleBaseService {
                 return;
             }
             await this.updateOneDynamicConfigEntity(interaction, dynamicConfigEntityChannelMany);
+            let textStrings: string[] = await this.getManyText(dynamicConfig.interaction, [
+                "BASE_NOTIFY_TITLE", "DYNAMIC_CONFIG_NOTIFY_CHANGE_SUCCESS"
+            ]);
+            await interaction.reply({embeds: this.dynamicConfigUI.notify(textStrings[0], textStrings[1]), ephemeral: true});
+            await this.sendDynamicConfigMessage(dynamicConfig);
+            return;
+        }
+
+        if(dynamicConfigEntity.type === "NumberTimeSeconds") {
+            let dynamicConfigEntityNumberTimeSeconds: DynamicConfigEntityNumberTimeSeconds = dynamicConfigEntity as DynamicConfigEntityNumberTimeSeconds;
+            if(!dynamicConfigEntityNumberTimeSeconds.check(value)) {
+                let textStrings: string[] = await this.getManyText(interaction, [
+                    "BASE_ERROR_TITLE", "DYNAMIC_CONFIG_ERROR_TYPE_NUMBER"], [
+                    null, [dynamicConfigEntityNumberTimeSeconds.properties.minValue, dynamicConfigEntityNumberTimeSeconds.properties.maxValue]
+                ]);
+                await interaction.reply({embeds: this.dynamicConfigUI.error(textStrings[0], textStrings[1]), ephemeral: true});
+                await this.sendDynamicConfigMessage(dynamicConfig);
+                return;
+            }
+            await this.updateOneDynamicConfigEntity(interaction, dynamicConfigEntityNumberTimeSeconds);
             let textStrings: string[] = await this.getManyText(dynamicConfig.interaction, [
                 "BASE_NOTIFY_TITLE", "DYNAMIC_CONFIG_NOTIFY_CHANGE_SUCCESS"
             ]);
@@ -798,8 +879,8 @@ export class DynamicConfigService extends ModuleBaseService {
                     .concat(categories.slice(i+1))
             }
             configs = await this.createDynamicConfigEntities(categories
-                .map((category: string) => configsMap.get(category) || [])
-                .reduce((a, b) => a.concat(b), []),
+                    .map((category: string) => configsMap.get(category) || [])
+                    .reduce((a, b) => a.concat(b), []),
                 dynamicConfig
             );
         }
