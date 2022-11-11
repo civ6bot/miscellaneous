@@ -6,7 +6,7 @@ import {DatabaseServiceUserProfile} from "../../database/services/service.UserPr
 import {UtilsServiceUsers} from "../../utils/services/utils.service.users";
 import {EntityUserPunishment} from "../../database/entities/entity.UserPunishment";
 import {EntityUserProfile} from "../../database/entities/entity.UserProfile";
-import {discordClient} from "../../discord/discord.client";
+import {discordClient} from "../../client/client";
 import {UtilsServiceTime} from "../../utils/services/utils.service.time";
 import {UtilsGeneratorTimestamp} from "../../utils/generators/utils.generator.timestamp";
 

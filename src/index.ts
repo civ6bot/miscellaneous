@@ -1,18 +1,17 @@
 import {importx} from "@discordx/importer";
-import {discordClient} from "./discord/discord.client";
+import {discordClient} from "./client/client";
 import {localDataSource, outerDataSource} from "./database/database.datasources";
 import {DatabaseServiceText} from "./database/services/service.Text";
 import {loadTextEntities} from "./utils/loaders/utils.loader.text";
 import {DatabaseServiceConfig} from "./database/services/service.Config";
 import {loadDefaultConfigs} from "./utils/loaders/utils.loader.config";
 import {ModerationService} from "./modules/moderation/moderation.service";
-import * as dotenv from "dotenv";
 import {UtilsServiceTime} from "./utils/services/utils.service.time";
+import * as dotenv from "dotenv";
 dotenv.config({path: 'miscellaneous.env'});
 
 importx(
-    __dirname + "/modules/*/*.interactions.{js,ts}",
-    __dirname + "/discord/discord.events.{js,ts}",
+    __dirname + "/modules/*/*.{events,interactions}.{js,ts}",
 ).then(() => {
     discordClient.login(((process.env.TEST_MODE === '1') ? process.env.TEST_BOT_TOKEN : process.env.BOT_TOKEN) as string).then(() => {
         console.log((process.env.TEST_MODE === '1') ? "Civilization VI – Test started" : "Civilization VI – Miscellaneous started");

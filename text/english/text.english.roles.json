@@ -1,0 +1,16 @@
+{
+  "lang": "English",
+  "text": [
+    { "tag": "ROLES_ERROR_NO_PERMISSION", "value": "You don't have permission to use this command." },
+    { "tag": "ROLES_ERROR_BOT_ROLE_NO_PERMISSION", "value": "Bot can't manage this role. Make sure that punishment role is exist and bot role has higher position in role list." },
+    { "tag": "ROLES_ERROR_BOUNDS", "value": "Input from 1 to 25 IDs of existing server roles." },
+    { "tag": "ROLES_ERROR_BOT_MESSAGE_NO_PERMISSION", "value": "Bot can't send message to this channel." },
+
+    { "tag": "ROLES_NOTIFY_DESCRIPTION", "value": "\uD83D\uDC64 Buttons were created successfully." },
+
+    { "tag": "ROLES_TITLE", "value": "\uD83D\uDC64 Choose the role" },
+    { "tag": "ROLES_DESCRIPTION", "value": "*Click on buttons below to add/remove role.*" },
+    { "tag": "ROLES_ADD_DESCRIPTION", "value": "You got <@&[ROLE_ID]> role." },
+    { "tag": "ROLES_REMOVE_DESCRIPTION", "value": "Role <@&[ROLE_ID]> was removed." }
+  ]
+}

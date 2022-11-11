@@ -1,0 +1,16 @@
+{
+  "lang": "Russian",
+  "text": [
+    { "tag": "ROLES_ERROR_NO_PERMISSION", "value": "У вас нет прав администратора для выполнения этой команды." },
+    { "tag": "ROLES_ERROR_BOT_ROLE_NO_PERMISSION", "value": "Бот не может управлять этой ролью. Убедитесь, что выбранная в настройках роль существует и расположена ниже роли бота." },
+    { "tag": "ROLES_ERROR_BOUNDS", "value": "Введите от 1 до 25 ID существующих ролей." },
+    { "tag": "ROLES_ERROR_BOT_MESSAGE_NO_PERMISSION", "value": "Бот не может отправить сообщение в этот канал." },
+
+    { "tag": "ROLES_NOTIFY_DESCRIPTION", "value": "\uD83D\uDC64 Сообщение с ролями было успешно создано." },
+
+    { "tag": "ROLES_TITLE", "value": "\uD83D\uDC64 Выбор ролей" },
+    { "tag": "ROLES_DESCRIPTION", "value": "*Нажмите на кнопки ниже, чтобы получить или убрать роль.*" },
+    { "tag": "ROLES_ADD_DESCRIPTION", "value": "Роль <@&[ROLE_ID]> успешно выдана." },
+    { "tag": "ROLES_REMOVE_DESCRIPTION", "value": "Роль <@&[ROLE_ID]> успешно удалена." }
+  ]
+}
