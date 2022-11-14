@@ -46,8 +46,7 @@ export class DatabaseServiceUserPunishment {
                 order: { timeMuteVoiceEnd: "asc" }
             }))?.timeMuteVoiceEnd
         ].filter(date => !!date)
-            .map((date: Date|null|undefined): Date => date as Date)
-        console.log("getNextExpiringTime, dateArray: ", dateArray);
+            .map((date: Date|null|undefined): Date => date as Date);
         if(dateArray.length === 0)
             return null;
         let timeArray: number[] = dateArray.map(date => date.getTime());

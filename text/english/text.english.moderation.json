@@ -8,6 +8,7 @@
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "User hasn't punishment of this type." },
     { "tag": "MODERATION_ERROR_NOT_PUNISHED_ANY", "value": "User hasn't any punishments." },
+    { "tag": "MODERATION_ERROR_TOO_MUCH_TIME", "value": "Too much time for punishment. Input maximum value is 1 year." },
 
     { "tag": "MODERATION_ERROR_BAN_TIER_MAX", "value": "User already has the highest T[TIER_LEVEL] ban tier." },
     { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Input value from 0 to [TIER_LEVEL_MAX]." },

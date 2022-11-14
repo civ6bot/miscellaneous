@@ -8,6 +8,7 @@
 
     { "tag": "MODERATION_ERROR_NOT_PUNISHED", "value": "У пользователя нет этого типа наказания." },
     { "tag": "MODERATION_ERROR_NOT_PUNISHED_ANY", "value": "У пользователя нет наказаний." },
+    { "tag": "MODERATION_ERROR_TOO_MUCH_TIME", "value": "Слишком долгий срок наказания. Введите значение не больше 1 года." },
 
     { "tag": "MODERATION_ERROR_BAN_TIER_MAX", "value": "Игрок уже имеет максимальный T[TIER_LEVEL] уровень бана." },
     { "tag": "MODERATION_ERROR_BAN_TIER_BOUNDS", "value": "Введите значение уровня бана от 0 до [TIER_LEVEL_MAX]." },
