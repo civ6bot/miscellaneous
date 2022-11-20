@@ -52,7 +52,7 @@
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID", "value": "Moderator roles (ID)" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID_EMOJI", "value": "⚙" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID", "value": "Text channels for reports (ID)" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID", "value": "Text channel for punishment reports (ID)" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID_EMOJI", "value": "⚙" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_BAN_ID", "value": "Banned role (ID)" },
