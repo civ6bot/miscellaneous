@@ -4,7 +4,7 @@ import { UtilsServiceTime } from "../../utils/services/utils.service.time";
 import { ModuleBaseService } from "../base/base.service";
 import { DiscordUI } from "./discord.ui";
 import * as dotenv from "dotenv";
-dotenv.config({path: 'general.env'});
+dotenv.config({path: 'miscellaneous.env'});
 
 export class DiscordService extends ModuleBaseService {
     private discordUI: DiscordUI = new DiscordUI();
