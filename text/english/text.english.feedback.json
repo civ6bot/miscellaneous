@@ -1,8 +1,0 @@
-{
-  "lang": "English",
-  "text": [
-    { "tag": "FEEDBACK_ABOUT_TITLE", "value": "ℹ️ About" },
-    { "tag": "FEEDBACK_ABOUT_DESCRIPTION", "value": "• Website: https://civ6bot.xyz\n• GitHub project: https://github.com/civ6bot\n• use slash \"/\" to get list of commands\n• support us! https://civ6bot.xyz/donate\n• developer Discord: **ZhenjaMax#3594**" },
-    { "tag": "FEEDBACK_ABOUT_IMAGE_URL", "value": "https://raw.githubusercontent.com/ZhenjaMax/civ6bot/main/docs/images/header.png" }
-  ]
-}

@@ -2,10 +2,8 @@ import {ButtonInteraction, CommandInteraction, EmbedBuilder, Guild, GuildMember,
 import {ModuleBaseService} from "../base/base.service";
 import {ModerationUI} from "./moderation.ui";
 import {DatabaseServiceUserPunishment} from "../../database/services/service.UserPunishment";
-//import {DatabaseServiceUserProfile} from "../../database/services/service.UserProfile";
 import {UtilsServiceUsers} from "../../utils/services/utils.service.users";
 import {EntityUserPunishment} from "../../database/entities/entity.UserPunishment";
-//import {EntityUserProfile} from "../../database/entities/entity.UserProfile";
 import {discordClient} from "../../client/client";
 import {UtilsServiceTime} from "../../utils/services/utils.service.time";
 import {UtilsGeneratorTimestamp} from "../../utils/generators/utils.generator.timestamp";
