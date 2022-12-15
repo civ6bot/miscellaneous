@@ -45,6 +45,10 @@
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION", "value": "Эта команда обнулит уровень банов для [USERS_AMOUNT] игроков.\n\n❗ **Это действие нельзя отменить!**" },
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CONFIRM", "value": "Подтвердить" },
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CANCEL", "value": "Отмена" },
-    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Уровни банов были успешно сброшены для [USERS_AMOUNT] игроков." }
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Уровни банов были успешно сброшены для [USERS_AMOUNT] игроков." },
+
+    { "tag": "MODERATION_PM_NOTIFICATION", "value": "Ваше наказание было снято модератором [MODERATOR_TAG]." },
+    { "tag": "MODERATION_PM_NOTIFICATION_PARDON", "value": "Все ваши ограничения были сняты модератором [MODERATOR_TAG]." },
+    { "tag": "MODERATION_PM_NOTIFICATION_TIMEOUT", "value": "Время вашего наказания истекло." }
   ]
 }

@@ -42,6 +42,8 @@ export class RolesService extends ModuleBaseService {
 
         let roles: Role[] = rolesString
             .replace(",", " ")
+            .replace("<@&", " ")
+            .replace(">", " ")
             .split(" ")
             .filter(id => id !== "")
             .map(id => (interaction.guild as Guild).roles.cache.get(id))

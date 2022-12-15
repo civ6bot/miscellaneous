@@ -68,6 +68,20 @@
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_VOICE_ID_EMOJI", "value": "\uD83D\uDD08" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX", "value": "Количество сообщений для команды /clear" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX_EMOJI", "value": "\uD83D\uDDD1" }
+    { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX_EMOJI", "value": "\uD83D\uDDD1" },
+
+
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS", "value": "Оповещения в ЛС" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_EMOJI", "value": "📲" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNBAN", "value": "Разбан" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNBAN_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_CHAT", "value": "Разблокировка текстовых каналов" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_CHAT_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_VOICE", "value": "Разблокировка голосовых каналов" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_VOICE_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON", "value": "Команда /pardon" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON_EMOJI", "value": "📲" }
   ]
 }

@@ -9,8 +9,8 @@ export abstract class RolesInteractions {
     @Slash({name: "roles", description: "create message to manage free roles" })
     public async roles(
         @SlashOption({
-            name: "ids",
-            description: "roles ID separated by space character",
+            name: "role-mentions",
+            description: "write mention there",
             type: ApplicationCommandOptionType.String,
             required: true,
         }) rolesID: string,

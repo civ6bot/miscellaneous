@@ -7,6 +7,7 @@ import {EntityUserPunishment} from "../../database/entities/entity.UserPunishmen
 import {discordClient} from "../../client/client";
 import {UtilsServiceTime} from "../../utils/services/utils.service.time";
 import {UtilsGeneratorTimestamp} from "../../utils/generators/utils.generator.timestamp";
+import { UtilsServicePM } from "../../utils/services/utils.service.PM";
 
 export class ModerationService extends ModuleBaseService {
     private moderationUI: ModerationUI = new ModerationUI();
@@ -17,27 +18,18 @@ export class ModerationService extends ModuleBaseService {
     public static async punishmentTimeout(): Promise<void> {
         let moderationService: ModerationService = new ModerationService();
         let databaseServiceUserPunishment: DatabaseServiceUserPunishment = new DatabaseServiceUserPunishment();
-        //let databaseServiceUserProfile: DatabaseServiceUserProfile = new DatabaseServiceUserProfile();
 
         let entitiesUserPunishment: EntityUserPunishment[] = await databaseServiceUserPunishment.getAllExpired();
-        //let entitiesUserProfile: EntityUserProfile[] = [];
 
-        //console.log("punishmentTimeout call");
         for(let entityUserPunishment of entitiesUserPunishment) {
-            //console.log("for cycle, entityUserPunishment: ", entityUserPunishment);
             let channelID: string = await moderationService.getOneSettingString(
                 entityUserPunishment.guildID, "MODERATION_CHANNEL_ID"
             );
             let guild: Guild | undefined = discordClient.guilds.cache.get(entityUserPunishment.guildID);
             let channel: TextChannel | undefined = guild?.channels.cache.get(channelID) as (TextChannel | undefined);
             let member: GuildMember | undefined = guild?.members.cache.get(entityUserPunishment.userID);
-            //let fameDifference: number = 0;
-            //console.log("guild, channel, member: ", !!guild, !!channel, !!member);
 
             if((entityUserPunishment.timeBanEnd !== null) && (entityUserPunishment.timeBanEnd.getTime() <= Date.now())) {
-                //fameDifference += 2*Math.round(
-                //    (entityUserPunishment.timeBanEnd.getTime()-(entityUserPunishment.timeBanStart?.getTime() as number))/(UtilsServiceTime.getMs(1, "h"))
-                //);
                 entityUserPunishment.timeBanStart = null;
                 entityUserPunishment.timeBanEnd = null;
                 entityUserPunishment.reasonBan = null;
@@ -53,7 +45,6 @@ export class ModerationService extends ModuleBaseService {
                     } catch {}
                 }
                 if(channel !== undefined) {
-                    //console.log("try to send in channel");
                     let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
                         "MODERATION_UNBAN_TITLE", "MODERATION_FIELD_USER_TITLE",
                         "MODERATION_BOTTOM_TIMEOUT"
@@ -67,12 +58,18 @@ export class ModerationService extends ModuleBaseService {
                         });
                     } catch {}
                 }
+                if(!!member && (await moderationService.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNBAN"))) {
+                    let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
+                        "MODERATION_UNBAN_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
+                    ]);
+                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                        textStrings[0], textStrings[1], 
+                        guild?.name as string, guild?.iconURL()
+                    ));
+                }
             }
 
             if((entityUserPunishment.timeMuteChatEnd !== null) && (entityUserPunishment.timeMuteChatEnd.getTime() <= Date.now())) {
-                //fameDifference += Math.round(
-                //    (entityUserPunishment.timeMuteChatEnd.getTime()-(entityUserPunishment.timeMuteChatStart?.getTime() as number))/(UtilsServiceTime.getMs(1, "h"))
-                //);
                 entityUserPunishment.timeMuteChatStart = null;
                 entityUserPunishment.timeMuteChatEnd = null;
                 entityUserPunishment.reasonMuteChat = null;
@@ -98,12 +95,18 @@ export class ModerationService extends ModuleBaseService {
                             )});
                     } catch {}
                 }
+                if(!!member && (await moderationService.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_CHAT"))) {
+                    let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
+                        "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
+                    ]);
+                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                        textStrings[0], textStrings[1], 
+                        guild?.name as string, guild?.iconURL()
+                    ));
+                }
             }
 
             if((entityUserPunishment.timeMuteVoiceEnd !== null) && (entityUserPunishment.timeMuteVoiceEnd.getTime() <= Date.now())) {
-                //fameDifference += Math.round(
-                //    (entityUserPunishment.timeMuteVoiceEnd.getTime()-(entityUserPunishment.timeMuteVoiceStart?.getTime() as number))/(UtilsServiceTime.getMs(1, "h"))
-                //);
                 entityUserPunishment.timeMuteVoiceStart = null;
                 entityUserPunishment.timeMuteVoiceEnd = null;
                 entityUserPunishment.reasonMuteVoice = null;
@@ -129,22 +132,22 @@ export class ModerationService extends ModuleBaseService {
                             )});
                     } catch {}
                 }
+                if(!!member && (await moderationService.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_VOICE"))) {
+                    let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
+                        "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
+                    ]);
+                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                        textStrings[0], textStrings[1], 
+                        guild?.name as string, guild?.iconURL()
+                    ));
+                }
             }
-
-            //let entityUserProfile: EntityUserProfile = await databaseServiceUserProfile.getOne(
-            //    entityUserPunishment.guildID, entityUserPunishment.userID
-            //);
-            //entityUserProfile.fame = Math.max(entityUserProfile.fame-fameDifference, 0);
-            //entitiesUserProfile.push(entityUserProfile);
         }
-
         await databaseServiceUserPunishment.insert(entitiesUserPunishment);
-        //await databaseServiceUserProfile.insert(entitiesUserProfile);
         await ModerationService.updatePunishmentTimeout();
     }
 
     public static async updatePunishmentTimeout(): Promise<void> {
-        //console.log("updatePunishmentTimeout call");
         if(this.punishmentTimeoutID !== null) {
             clearTimeout(this.punishmentTimeoutID);
             this.punishmentTimeoutID = null;
@@ -152,13 +155,10 @@ export class ModerationService extends ModuleBaseService {
         let databaseServiceUserPunishment: DatabaseServiceUserPunishment = new DatabaseServiceUserPunishment();
 
         let nextTime: Date|null = await databaseServiceUserPunishment.getNextExpiringTime();
-        //console.log("current time:", new Date());
-        //console.log("next time: ", nextTime);
         if(nextTime !== null) {
-            //console.log("elapsed time, ms: ", nextTime.getTime() - Date.now());
             ModerationService.punishmentTimeoutID = setTimeout(
                 ModerationService.punishmentTimeout,
-                Math.max(500, nextTime.getTime()-Date.now())  // 500 ms для тестов
+                Math.max(500, nextTime.getTime()-Date.now())  // 500 ms чтобы не было спама в чате
             );
         }
     }
@@ -313,7 +313,6 @@ export class ModerationService extends ModuleBaseService {
             entityUserPunishment.timeBanEnd = new Date(entityUserPunishment.timeBanEnd?.getTime() as number + UtilsServiceTime.getMs(timeAmount, timeType));
         } else {
             entityUserPunishment.timeBanStart = new Date();
-            //console.log("UtilsServiceTime.getMs: ", timeAmount, timeType, UtilsServiceTime.getMs(timeAmount, timeType));
             entityUserPunishment.timeBanEnd = new Date(Date.now() + UtilsServiceTime.getMs(timeAmount, timeType));
         }
         if(UtilsServiceTime.getMs(1, "y") < (entityUserPunishment.timeBanEnd.getTime() - (entityUserPunishment.timeBanStart?.getTime() as number))) 
@@ -576,6 +575,15 @@ export class ModerationService extends ModuleBaseService {
                 await channel.send({embeds: embed});
             } catch {}
         }
+        if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_PARDON")) {
+            let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
+                "MODERATION_PARDON_TITLE", "MODERATION_PM_NOTIFICATION_PARDON",
+            ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
+            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+                textStrings[0], textStrings[1], 
+                interaction.guild?.name as string, interaction.guild?.iconURL()
+            ));
+        }
         await ModerationService.updatePunishmentTimeout();
     }
 
@@ -748,6 +756,15 @@ export class ModerationService extends ModuleBaseService {
         );
         await interaction.reply({embeds: embed});
         await this.trySendToModerationChannel(interaction, embed);
+        if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNBAN")) {
+            let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
+                "MODERATION_UNBAN_TITLE", "MODERATION_PM_NOTIFICATION",
+            ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
+            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+                textStrings[0], textStrings[1], 
+                interaction.guild?.name as string, interaction.guild?.iconURL()
+            ));
+        }
         await ModerationService.updatePunishmentTimeout();
     }
 
@@ -784,6 +801,15 @@ export class ModerationService extends ModuleBaseService {
         );
         await interaction.reply({embeds: embed});
         await this.trySendToModerationChannel(interaction, embed);
+        if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_CHAT")) {
+            let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
+                "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_PM_NOTIFICATION",
+            ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
+            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+                textStrings[0], textStrings[1], 
+                interaction.guild?.name as string, interaction.guild?.iconURL()
+            ));
+        }
         await ModerationService.updatePunishmentTimeout();
     }
 
@@ -820,6 +846,15 @@ export class ModerationService extends ModuleBaseService {
         );
         await interaction.reply({embeds: embed});
         await this.trySendToModerationChannel(interaction, embed);
+        if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_VOICE")) {
+            let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
+                "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_PM_NOTIFICATION",
+            ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
+            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+                textStrings[0], textStrings[1], 
+                interaction.guild?.name as string, interaction.guild?.iconURL()
+            ));
+        }
         await ModerationService.updatePunishmentTimeout();
     }
 }

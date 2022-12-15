@@ -45,6 +45,10 @@
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION", "value": "This command will set ban levels to zero for [USERS_AMOUNT] users.\n\n❗ **This action cannot be undone!**" },
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CONFIRM", "value": "Confirm" },
     { "tag": "MODERATION_BAN_TIER_RESET_ALL_BUTTON_CANCEL", "value": "Cancel" },
-    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Ban levels have been reset for [USERS_AMOUNT] users." }
+    { "tag": "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS", "value": "Ban levels have been reset for [USERS_AMOUNT] users." },
+
+    { "tag": "MODERATION_PM_NOTIFICATION", "value": "Your punishment was removed by moderator [MODERATOR_TAG]." },
+    { "tag": "MODERATION_PM_NOTIFICATION_PARDON", "value": "Your all punishments were removed by moderator [MODERATOR_TAG]." },
+    { "tag": "MODERATION_PM_NOTIFICATION_TIMEOUT", "value": "Your punishment time has expired." }
   ]
 }

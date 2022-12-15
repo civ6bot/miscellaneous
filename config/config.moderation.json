@@ -9,5 +9,10 @@
   { "setting": "MODERATION_ROLE_MUTE_CHAT_ID", "value": "" },
   { "setting": "MODERATION_ROLE_MUTE_VOICE_ID", "value": "" },
 
-  { "setting": "MODERATION_CLEAR_MAX", "value": 10 }
+  { "setting": "MODERATION_CLEAR_MAX", "value": 10 },
+
+  { "setting": "MODERATION_NOTIFICATION_UNBAN", "value": 1 },
+  { "setting": "MODERATION_NOTIFICATION_UNMUTE_CHAT", "value": 1 },
+  { "setting": "MODERATION_NOTIFICATION_UNMUTE_VOICE", "value": 1 },
+  { "setting": "MODERATION_NOTIFICATION_PARDON", "value": 1 }
 ]

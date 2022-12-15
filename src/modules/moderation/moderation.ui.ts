@@ -47,6 +47,20 @@ export class ModerationUI extends ModuleBaseUI {
         );
     }
 
+    public riddancePMEmbed(
+        title: string, description: string,
+        guildName: string, guildAvatar: string | null = null
+    ): EmbedBuilder[] {
+        return UtilsGeneratorEmbed.getSingle(
+            title,
+            "#9FCFF9",
+            description,
+            [],
+            guildName,
+            guildAvatar
+        );
+    }
+
     public clearEmbed(title: string): EmbedBuilder[] {
         return UtilsGeneratorEmbed.getSingle(title, "#F4900C");
     }
