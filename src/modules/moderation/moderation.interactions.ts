@@ -36,7 +36,7 @@ export abstract class ModerationInteractions{
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.ban(interaction, member, timeType, timeAmount, reason) }
+    ){ this.moderationService.ban(interaction, member, timeType, timeAmount, reason) }
 
     @Slash({name: "ban-tier", description: "Ban user by time tiers"})
     async banTier(
@@ -53,7 +53,7 @@ export abstract class ModerationInteractions{
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.banTierBan(interaction, member, reason) }
+    ){ this.moderationService.banTierBan(interaction, member, reason) }
 
     @Slash({name: "unban", description: "Unban user"})
     async unban(
@@ -70,7 +70,7 @@ export abstract class ModerationInteractions{
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ) { await this.moderationService.unban(interaction, member, reason) }
+    ) { this.moderationService.unban(interaction, member, reason) }
 
     @Slash({name: "pardon", description: "Remove all restrictions of user"})
     async pardon(
@@ -87,7 +87,7 @@ export abstract class ModerationInteractions{
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ) { await this.moderationService.pardon(interaction, member, reason) }
+    ) { this.moderationService.pardon(interaction, member, reason) }
 
     @Slash({name: "clear", description: "delete last messages"})
     async clear(
@@ -98,17 +98,17 @@ export abstract class ModerationInteractions{
             required: true
         }) clearAmount: number,
         interaction: CommandInteraction
-    ) { await this.moderationService.clear(interaction, clearAmount) }
+    ) { this.moderationService.clear(interaction, clearAmount) }
 
     @ButtonComponent({id: "moderation-ban-tier-reset-all-confirm"})
     async banTierResetAllButtonConfirm(
         interaction: ButtonInteraction
-    ) { await this.moderationService.banTierResetAllButtonConfirm(interaction) }
+    ) { this.moderationService.banTierResetAllButtonConfirm(interaction) }
 
     @ButtonComponent({id: "moderation-ban-tier-reset-all-cancel"})
     async banTierResetAllButtonCancel(
         interaction: ButtonInteraction
-    ) { await this.moderationService.banTierResetAllButtonCancel(interaction) }
+    ) { this.moderationService.banTierResetAllButtonCancel(interaction) }
 }
 
 @Discord()
@@ -138,7 +138,7 @@ export abstract class ModerationBanTierInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ) { await this.moderationService.banTierSet(interaction, member, banTier, reason) }
+    ) { this.moderationService.banTierSet(interaction, member, banTier, reason) }
 }
 
 @Discord()
@@ -166,12 +166,12 @@ export abstract class ModerationBanTierResetInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ) { await this.moderationService.banTierResetUser(interaction, member, reason) }
+    ) { this.moderationService.banTierResetUser(interaction, member, reason) }
 
     @Slash({ name: "all", description: "Reset ban tier for all users" })
     async banTierResetAll(
         interaction: CommandInteraction
-    ) { await this.moderationService.banTierResetAll(interaction) }
+    ) { this.moderationService.banTierResetAll(interaction) }
 }
 
 @Discord()
@@ -210,7 +210,7 @@ export abstract class ModerationMuteInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.muteVoice(interaction, member, timeType, timeAmount, reason) }
+    ){ this.moderationService.muteVoice(interaction, member, timeType, timeAmount, reason) }
 
     @Slash({name: "chat", description: "Disable chat for user"})
     public async chat(
@@ -242,7 +242,7 @@ export abstract class ModerationMuteInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.muteChat(interaction, member, timeType, timeAmount, reason) }
+    ){ this.moderationService.muteChat(interaction, member, timeType, timeAmount, reason) }
 }
 
 @Discord()
@@ -266,7 +266,7 @@ export abstract class ModerationUnmuteInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.unmuteVoice(interaction, member, reason) }
+    ){ this.moderationService.unmuteVoice(interaction, member, reason) }
 
     @Slash({name: "chat", description: "Unmute chat for user"})
     public async chat(
@@ -283,5 +283,5 @@ export abstract class ModerationUnmuteInteractions {
             required: false
         }) reason: string = "",
         interaction: CommandInteraction
-    ){ await this.moderationService.unmuteChat(interaction, member, reason) }
+    ){ this.moderationService.unmuteChat(interaction, member, reason) }
 }

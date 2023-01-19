@@ -34,7 +34,7 @@ export class RolesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "ROLES_ERROR_NO_PERMISSION"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.rolesUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -54,7 +54,7 @@ export class RolesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "ROLES_ERROR_BOUNDS"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.rolesUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -94,7 +94,7 @@ export class RolesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "ROLES_ERROR_BOT_MESSAGE_NO_PERMISSION"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.rolesUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -103,7 +103,7 @@ export class RolesService extends ModuleBaseService {
         textStrings = await this.getManyText(interaction, [
             "BASE_NOTIFY_TITLE", "ROLES_NOTIFY_DESCRIPTION"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.rolesUI.notify(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -116,7 +116,7 @@ export class RolesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "ROLES_ERROR_BOT_ROLE_NO_PERMISSION"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.rolesUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -127,7 +127,7 @@ export class RolesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "ROLES_ERROR_BOT_ROLE_NO_PERMISSION"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.rolesUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -136,7 +136,7 @@ export class RolesService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_NOTIFY_TITLE", hasRole ? "ROLES_REMOVE_DESCRIPTION" : "ROLES_ADD_DESCRIPTION"
         ], [null, [roleID]]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.rolesUI.notify(textStrings[0], textStrings[1]),
             ephemeral: true
         });

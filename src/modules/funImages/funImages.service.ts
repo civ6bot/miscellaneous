@@ -20,10 +20,10 @@ export class FunImagesService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "FUN_IMAGES_ERROR_NO_AVATAR"
             ]);
-            return await interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
+            return interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
         }
         let title: string = await this.getOneText(interaction, "FUN_IMAGES_AVATAR_TITLE", currentMember.user.tag);
-        await interaction.reply({embeds: this.funImagesUI.avatar(title, imageURL)});
+        interaction.reply({embeds: this.funImagesUI.avatar(title, imageURL)});
     }
 
     public async cat(interaction: CommandInteraction) {
@@ -35,14 +35,13 @@ export class FunImagesService extends ModuleBaseService {
                 interaction,
                 ["BASE_ERROR_TITLE", "FUN_IMAGES_ERROR_NO_IMAGE"],
             );
-            await interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
-            return;
+            return interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
         }
         let textStrings: string[] = await this.getManyText(
             interaction,
             ["FUN_IMAGES_CAT_TITLE", "FUN_IMAGES_CAT_DESCRIPTION"],
         );
-        await interaction.reply({embeds: this.funImagesUI.cat(textStrings[0], textStrings[1], imageURL)});
+        interaction.reply({embeds: this.funImagesUI.cat(textStrings[0], textStrings[1], imageURL)});
     }
 
     public async dog(interaction: CommandInteraction) {
@@ -52,13 +51,12 @@ export class FunImagesService extends ModuleBaseService {
                 interaction,
                 ["BASE_ERROR_TITLE", "FUN_IMAGES_ERROR_NO_IMAGE"],
             );
-            await interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
-            return;
+            return interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
         }
         let textStrings: string[] = await this.getManyText(
             interaction,
             ["FUN_IMAGES_DOG_TITLE", "FUN_IMAGES_DOG_DESCRIPTION"],
         );
-        await interaction.reply({embeds: this.funImagesUI.dog(textStrings[0], textStrings[1], imageURL)});
+        interaction.reply({embeds: this.funImagesUI.dog(textStrings[0], textStrings[1], imageURL)});
     }
 }

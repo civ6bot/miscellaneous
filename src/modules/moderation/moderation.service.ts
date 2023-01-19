@@ -37,7 +37,7 @@ export class ModerationService extends ModuleBaseService {
 
                 if(member !== undefined) {
                     try {
-                        await member.roles.remove(
+                        member.roles.remove(
                             await moderationService.getOneSettingString(
                                 entityUserPunishment.guildID, "MODERATION_ROLE_BAN_ID"
                             )
@@ -50,7 +50,7 @@ export class ModerationService extends ModuleBaseService {
                         "MODERATION_BOTTOM_TIMEOUT"
                     ]);
                     try {
-                        await channel.send({
+                        channel.send({
                             embeds: moderationService.moderationUI.riddanceEmbed(
                                 textStrings[0], textStrings[1], entityUserPunishment.userID,
                                 null, null, textStrings[2], null
@@ -62,7 +62,7 @@ export class ModerationService extends ModuleBaseService {
                     let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
                         "MODERATION_UNBAN_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
                     ]);
-                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                    UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
                         textStrings[0], textStrings[1], 
                         guild?.name as string, guild?.iconURL()
                     ));
@@ -76,7 +76,7 @@ export class ModerationService extends ModuleBaseService {
 
                 if(member !== undefined) {
                     try {
-                        await member.roles.remove(
+                        member.roles.remove(
                             await moderationService.getOneSettingString(
                                 entityUserPunishment.guildID, "MODERATION_ROLE_MUTE_CHAT_ID"
                             )
@@ -89,7 +89,7 @@ export class ModerationService extends ModuleBaseService {
                             "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_FIELD_USER_TITLE",
                             "MODERATION_BOTTOM_TIMEOUT"
                         ]);
-                        await channel.send({embeds: moderationService.moderationUI.riddanceEmbed(
+                        channel.send({embeds: moderationService.moderationUI.riddanceEmbed(
                                 textStrings[0], textStrings[1], entityUserPunishment.userID,
                                 null, null, textStrings[2], null
                             )});
@@ -99,7 +99,7 @@ export class ModerationService extends ModuleBaseService {
                     let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
                         "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
                     ]);
-                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                    UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
                         textStrings[0], textStrings[1], 
                         guild?.name as string, guild?.iconURL()
                     ));
@@ -113,7 +113,7 @@ export class ModerationService extends ModuleBaseService {
 
                 if(member !== undefined) {
                     try {
-                        await member.roles.remove(
+                        member.roles.remove(
                             await moderationService.getOneSettingString(
                                 entityUserPunishment.guildID, "MODERATION_ROLE_MUTE_VOICE_ID"
                             )
@@ -126,7 +126,7 @@ export class ModerationService extends ModuleBaseService {
                             "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_FIELD_USER_TITLE",
                             "MODERATION_BOTTOM_TIMEOUT"
                         ]);
-                        await channel.send({embeds: moderationService.moderationUI.riddanceEmbed(
+                        channel.send({embeds: moderationService.moderationUI.riddanceEmbed(
                                 textStrings[0], textStrings[1], entityUserPunishment.userID,
                                 null, null, textStrings[2], null
                             )});
@@ -136,15 +136,15 @@ export class ModerationService extends ModuleBaseService {
                     let textStrings: string[] = await moderationService.getManyText(entityUserPunishment.guildID, [
                         "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_PM_NOTIFICATION_TIMEOUT",
                     ]);
-                    await UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
+                    UtilsServicePM.send(entityUserPunishment.userID, moderationService.moderationUI.riddancePMEmbed(
                         textStrings[0], textStrings[1], 
                         guild?.name as string, guild?.iconURL()
                     ));
                 }
             }
         }
-        await databaseServiceUserPunishment.insert(entitiesUserPunishment);
-        await ModerationService.updatePunishmentTimeout();
+        databaseServiceUserPunishment.insert(entitiesUserPunishment);
+        ModerationService.updatePunishmentTimeout();
     }
 
     public static async updatePunishmentTimeout(): Promise<void> {
@@ -180,7 +180,7 @@ export class ModerationService extends ModuleBaseService {
                 changedEntitiesUserPunishment.push(entitiesUserPunishment[i]);
             }
         }
-        await databaseServiceUserPunishment.insert(changedEntitiesUserPunishment);
+        databaseServiceUserPunishment.insert(changedEntitiesUserPunishment);
     }
 
     private async isModerator(interaction: CommandInteraction | ButtonInteraction): Promise<boolean> {
@@ -197,7 +197,7 @@ export class ModerationService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_ERROR_TITLE", "MODERATION_ERROR_NO_PERMISSION"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -207,7 +207,7 @@ export class ModerationService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_ERROR_TITLE", "MODERATION_ERROR_ROLE_MISSING_CONFIG"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -217,7 +217,7 @@ export class ModerationService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_ERROR_TITLE", "MODERATION_ERROR_USER_NOT_FOUND"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -227,7 +227,7 @@ export class ModerationService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_ERROR_TITLE", "MODERATION_ERROR_NOT_PUNISHED"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -237,7 +237,7 @@ export class ModerationService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction, [
             "BASE_ERROR_TITLE", "MODERATION_ERROR_TOO_MUCH_TIME"
         ]);
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
             ephemeral: true
         });
@@ -259,7 +259,7 @@ export class ModerationService extends ModuleBaseService {
         let channel: TextChannel | undefined = interaction.guild?.channels.cache.get(channelID) as (TextChannel | undefined);
         if(channel !== undefined) {
             try {
-                await channel.send({embeds: embed});
+                channel.send({embeds: embed});
             } catch {}
         }
     }
@@ -294,16 +294,16 @@ export class ModerationService extends ModuleBaseService {
         reason: string
     ) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_BAN_ID");
         //console.log(roleID);
         if(!await this.addRole(member, roleID))
-            return await this.replyRoleMissing(interaction);
+            return this.replyRoleMissing(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guild?.id as string, userID
@@ -316,7 +316,7 @@ export class ModerationService extends ModuleBaseService {
             entityUserPunishment.timeBanEnd = new Date(Date.now() + UtilsServiceTime.getMs(timeAmount, timeType));
         }
         if(UtilsServiceTime.getMs(1, "y") < (entityUserPunishment.timeBanEnd.getTime() - (entityUserPunishment.timeBanStart?.getTime() as number))) 
-            return await this.replyTooMuchTime(interaction);
+            return this.replyTooMuchTime(interaction);
 
         let textStrings: string[] = await this.getManyText(interaction, [
             hasPunishment ? "MODERATION_BAN_EXTENSION_TITLE" : "MODERATION_BAN_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -324,7 +324,7 @@ export class ModerationService extends ModuleBaseService {
             "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "MODERATION_BOTTOM_AUTHOR"
         ]);
         entityUserPunishment.reasonBan = (reason === "") ? textStrings[4] : reason;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let embed: EmbedBuilder[] = this.moderationUI.punishmentEmbed(
             textStrings[0], textStrings[1],
@@ -332,18 +332,18 @@ export class ModerationService extends ModuleBaseService {
             UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeBanEnd), textStrings[3],
             entityUserPunishment.reasonBan, textStrings[5], interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
-        await ModerationService.updatePunishmentTimeout();
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async banTierBan(interaction: CommandInteraction, member: GuildMember, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guild?.id as string, userID
@@ -355,7 +355,7 @@ export class ModerationService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BAN_TIER_MAX"
             ], [null, [banTierLevels.length]]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -363,7 +363,7 @@ export class ModerationService extends ModuleBaseService {
 
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_BAN_ID");
         if(!await this.addRole(member, roleID))
-            return await this.replyRoleMissing(interaction);
+            return this.replyRoleMissing(interaction);
 
         if(entityUserPunishment.timeBanEnd !== null) {
             entityUserPunishment.timeBanEnd = new Date(entityUserPunishment.timeBanEnd?.getTime() as number + UtilsServiceTime.getMs(banTierLevels[entityUserPunishment.banTier], "d"));
@@ -380,7 +380,7 @@ export class ModerationService extends ModuleBaseService {
             [entityUserPunishment.banTier]
         ]);
         entityUserPunishment.reasonBan = (reason === "") ? textStrings[4] : reason;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let embed: EmbedBuilder[] = this.moderationUI.punishmentEmbed(
             textStrings[0], textStrings[1],
@@ -388,17 +388,17 @@ export class ModerationService extends ModuleBaseService {
             UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeBanEnd), textStrings[3],
             entityUserPunishment.reasonBan, textStrings[5], interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
-        await ModerationService.updatePunishmentTimeout();
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async banTierSet(interaction: CommandInteraction, member: GuildMember, banTier: number, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let maxTierLevel: number = (await this.getOneSettingString(interaction, "MODERATION_BAN_TIERS"))
             .split(" ")
@@ -407,7 +407,7 @@ export class ModerationService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BAN_TIER_BOUNDS"
             ], [null, [maxTierLevel]]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -420,7 +420,7 @@ export class ModerationService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BAN_TIER_SAME"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -428,7 +428,7 @@ export class ModerationService extends ModuleBaseService {
 
         let banTierBefore: number = entityUserPunishment.banTier;
         entityUserPunishment.banTier = banTier;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
         let textStrings: string[] = await this.getManyText(interaction, [
             "MODERATION_BAN_TIER_CHANGE", "MODERATION_FIELD_USER_TITLE",
             "MODERATION_FIELD_BAN_TIER_CHANGE_TITLE", "MODERATION_FIELD_BAN_TIER_CHANGE_DESCRIPTION",
@@ -443,24 +443,24 @@ export class ModerationService extends ModuleBaseService {
             (reason === "") ? textStrings[5] : reason,
             textStrings[6], interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
     }
 
     public async banTierResetUser(interaction: CommandInteraction, member: GuildMember, reason: string) {
-        await this.banTierSet(interaction, member, 0, reason);
+        this.banTierSet(interaction, member, 0, reason);
     }
 
     public async banTierResetAll(interaction: CommandInteraction) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let entityUsersBanTier: EntityUserPunishment[] = await this.databaseServiceUserPunishment.getAllWithBanTier();
         if(entityUsersBanTier.length === 0) {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BAN_TIER_RESET_ALL_NO_USERS"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -475,7 +475,7 @@ export class ModerationService extends ModuleBaseService {
         let emojis: string[] = await this.getManySettingString(interaction,
             "BASE_EMOJI_YES", "BASE_EMOJI_NO"
         );
-        await interaction.reply({
+        interaction.reply({
             embeds: this.moderationUI.notify(textStrings[0], textStrings[1]),
             components: this.moderationUI.banTierResetAllButtons(
                 [textStrings[2], textStrings[3]],
@@ -486,16 +486,16 @@ export class ModerationService extends ModuleBaseService {
 
     public async banTierResetAllButtonConfirm(interaction: ButtonInteraction) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
-        await interaction.deferUpdate();
+        interaction.deferUpdate();
         let entityUsersBanTier: EntityUserPunishment[] = await this.databaseServiceUserPunishment.getAllWithBanTier();
         entityUsersBanTier.forEach(entity => entity.banTier = 0);
-        await this.databaseServiceUserPunishment.insert(entityUsersBanTier);
+        this.databaseServiceUserPunishment.insert(entityUsersBanTier);
         let textStrings: string[] = await this.getManyText(interaction, [
             "MODERATION_BAN_TIER_RESET_ALL_TITLE", "MODERATION_BAN_TIER_RESET_ALL_DESCRIPTION_SUCCESS",
         ], [null, [entityUsersBanTier.length]]);
-        await interaction.message.edit({
+        interaction.message.edit({
             components: [],
             embeds: this.moderationUI.notify(textStrings[0], textStrings[1])
         });
@@ -503,17 +503,17 @@ export class ModerationService extends ModuleBaseService {
 
     public async banTierResetAllButtonCancel(interaction: ButtonInteraction) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
-        await interaction.message.delete();
+            return this.replyNoPermission(interaction);
+        interaction.message.delete();
     }
 
     public async pardon(interaction: CommandInteraction, member: GuildMember, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guildId as string, userID
@@ -526,7 +526,7 @@ export class ModerationService extends ModuleBaseService {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_NOT_PUNISHED_ANY"
             ]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
@@ -544,14 +544,14 @@ export class ModerationService extends ModuleBaseService {
         entityUserPunishment.timeMuteVoiceEnd = null;
         entityUserPunishment.reasonMuteVoice = null;
 
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let rolesID: string[] = await this.getManySettingString(interaction,
             "MODERATION_ROLE_BAN_ID", "MODERATION_ROLE_MUTE_CHAT_ID",
             "MODERATION_ROLE_MUTE_VOICE_ID"
         );
         for(let roleID of rolesID)
-            await this.removeRole(member, roleID);
+            this.removeRole(member, roleID);
 
         let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
             "MODERATION_PARDON_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -564,7 +564,7 @@ export class ModerationService extends ModuleBaseService {
             (reason === "") ? textStrings[3] : reason, textStrings[4],
             interaction.user
         );
-        await interaction.reply({embeds: embed});
+        interaction.reply({embeds: embed});
 
         let channelID: string = await this.getOneSettingString(
             entityUserPunishment.guildID, "MODERATION_CHANNEL_ID"
@@ -572,53 +572,53 @@ export class ModerationService extends ModuleBaseService {
         let channel: TextChannel | undefined = interaction.guild?.channels.cache.get(channelID) as TextChannel;
         if(channel !== undefined) {
             try {
-                await channel.send({embeds: embed});
+                channel.send({embeds: embed});
             } catch {}
         }
         if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_PARDON")) {
             let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
                 "MODERATION_PARDON_TITLE", "MODERATION_PM_NOTIFICATION_PARDON",
             ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
-            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+            UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
                 textStrings[0], textStrings[1], 
                 interaction.guild?.name as string, interaction.guild?.iconURL()
             ));
         }
-        await ModerationService.updatePunishmentTimeout();
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async clear(interaction: CommandInteraction, clearAmount: number) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
         let clearAmountMax: number = await this.getOneSettingNumber(interaction, "MODERATION_CLEAR_MAX");
         if((clearAmount > clearAmountMax) || (clearAmount < 1)) {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_CLEAR_BOUNDS"
             ], [null, [clearAmountMax]]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
         }
 
-        await interaction.deferReply({ephemeral: true});
+        interaction.deferReply({ephemeral: true});
         let channel: TextChannel = interaction.channel as TextChannel;
         let fetchedMessages = await channel.messages.fetch({limit: clearAmount});
         let fetchedMessagesAmount: number = Array.from(fetchedMessages.keys()).length;
         try {
-            await channel.bulkDelete(fetchedMessages);
+            channel.bulkDelete(fetchedMessages);
         } catch {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BOT_NO_PERMISSION"
             ], [null, [clearAmountMax]]);
-            return await interaction.reply({
+            return interaction.reply({
                 embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
                 ephemeral: true
             });
         }
 
         let title: string = await this.getOneText(interaction, "MODERATION_CLEAR_TITLE", fetchedMessagesAmount);
-        await interaction.editReply({embeds: this.moderationUI.clearEmbed(title)});
+        interaction.editReply({embeds: this.moderationUI.clearEmbed(title)});
     }
 
     public async muteVoice(
@@ -629,15 +629,15 @@ export class ModerationService extends ModuleBaseService {
         reason: string
     ) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_MUTE_VOICE_ID");
         if(!await this.addRole(member, roleID))
-            return await this.replyRoleMissing(interaction);
+            return this.replyRoleMissing(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guild?.id as string, userID
@@ -650,7 +650,7 @@ export class ModerationService extends ModuleBaseService {
             entityUserPunishment.timeMuteVoiceEnd = new Date(Date.now() + UtilsServiceTime.getMs(timeAmount, timeType));
         }
         if(UtilsServiceTime.getMs(1, "y") < (entityUserPunishment.timeMuteVoiceEnd.getTime() - (entityUserPunishment.timeMuteVoiceStart?.getTime() as number))) 
-            return await this.replyTooMuchTime(interaction);
+            return this.replyTooMuchTime(interaction);
 
         let textStrings: string[] = await this.getManyText(interaction, [
             hasPunishment ? "MODERATION_MUTE_VOICE_EXTENSION_TITLE" : "MODERATION_MUTE_VOICE_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -658,7 +658,7 @@ export class ModerationService extends ModuleBaseService {
             "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "MODERATION_BOTTOM_AUTHOR"
         ]);
         entityUserPunishment.reasonMuteVoice = (reason === "") ? textStrings[4] : reason;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let embed: EmbedBuilder[] = this.moderationUI.punishmentEmbed(
             textStrings[0], textStrings[1],
@@ -666,10 +666,10 @@ export class ModerationService extends ModuleBaseService {
             UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeMuteVoiceEnd), textStrings[3],
             entityUserPunishment.reasonMuteVoice, textStrings[5], interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
-        await ModerationService.updatePunishmentTimeout();
-        await this.tryKickFromVoice(member);
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
+        ModerationService.updatePunishmentTimeout();
+        this.tryKickFromVoice(member);
     }
 
     public async muteChat(
@@ -680,15 +680,15 @@ export class ModerationService extends ModuleBaseService {
         reason: string
     ) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_MUTE_CHAT_ID");
         if(!await this.addRole(member, roleID))
-            return await this.replyRoleMissing(interaction);
+            return this.replyRoleMissing(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guild?.id as string, userID
@@ -701,7 +701,7 @@ export class ModerationService extends ModuleBaseService {
             entityUserPunishment.timeMuteChatEnd = new Date(Date.now() + UtilsServiceTime.getMs(timeAmount, timeType));
         }
         if(UtilsServiceTime.getMs(1, "y") < (entityUserPunishment.timeMuteChatEnd.getTime() - (entityUserPunishment.timeMuteChatStart?.getTime() as number))) 
-            return await this.replyTooMuchTime(interaction);
+            return this.replyTooMuchTime(interaction);
 
         let textStrings: string[] = await this.getManyText(interaction, [
             hasPunishment ? "MODERATION_MUTE_CHAT_EXTENSION_TITLE" : "MODERATION_MUTE_CHAT_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -709,7 +709,7 @@ export class ModerationService extends ModuleBaseService {
             "MODERATION_FIELD_REASON_DESCRIPTION_NONE", "MODERATION_BOTTOM_AUTHOR"
         ]);
         entityUserPunishment.reasonMuteChat = (reason === "") ? textStrings[4] : reason;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let embed: EmbedBuilder[] = this.moderationUI.punishmentEmbed(
             textStrings[0], textStrings[1],
@@ -717,31 +717,31 @@ export class ModerationService extends ModuleBaseService {
             UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeMuteChatEnd), textStrings[3],
             entityUserPunishment.reasonMuteChat, textStrings[5], interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
-        await ModerationService.updatePunishmentTimeout();
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async unban(interaction: CommandInteraction, member: GuildMember, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guild?.id as string, userID
         );
         if(entityUserPunishment.timeBanStart === null)
-            return await this.replyUserNotPunished(interaction);
+            return this.replyUserNotPunished(interaction);
         entityUserPunishment.timeBanStart = null;
         entityUserPunishment.timeBanEnd = null;
         entityUserPunishment.reasonBan = null;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
 
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_BAN_ID");
-        await this.removeRole(member, roleID);
+        this.removeRole(member, roleID);
 
         let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
             "MODERATION_UNBAN_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -754,39 +754,39 @@ export class ModerationService extends ModuleBaseService {
             (reason === "") ? textStrings[3] : reason, textStrings[4],
             interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
         if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNBAN")) {
             let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
                 "MODERATION_UNBAN_TITLE", "MODERATION_PM_NOTIFICATION",
             ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
-            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+            UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
                 textStrings[0], textStrings[1], 
                 interaction.guild?.name as string, interaction.guild?.iconURL()
             ));
         }
-        await ModerationService.updatePunishmentTimeout();
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async unmuteChat(interaction: CommandInteraction, member: GuildMember, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guildId as string, userID
         );
         if(entityUserPunishment.timeMuteChatStart === null)
-            return await this.replyUserNotPunished(interaction);
+            return this.replyUserNotPunished(interaction);
         entityUserPunishment.timeMuteChatStart = null;
         entityUserPunishment.timeMuteChatEnd = null;
         entityUserPunishment.reasonMuteChat = null;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_MUTE_CHAT_ID");
-        await this.removeRole(member, roleID);
+        this.removeRole(member, roleID);
 
         let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
             "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -799,39 +799,39 @@ export class ModerationService extends ModuleBaseService {
             (reason === "") ? textStrings[3] : reason, textStrings[4],
             interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
         if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_CHAT")) {
             let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
                 "MODERATION_UNMUTE_CHAT_TITLE", "MODERATION_PM_NOTIFICATION",
             ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
-            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+            UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
                 textStrings[0], textStrings[1], 
                 interaction.guild?.name as string, interaction.guild?.iconURL()
             ));
         }
-        await ModerationService.updatePunishmentTimeout();
+        ModerationService.updatePunishmentTimeout();
     }
 
     public async unmuteVoice(interaction: CommandInteraction, member: GuildMember, reason: string) {
         if(!await this.isModerator(interaction))
-            return await this.replyNoPermission(interaction);
+            return this.replyNoPermission(interaction);
 
         let userID: string|undefined = member?.user.id;
         if(userID === undefined)
-            return await this.replyUserNotFound(interaction);
+            return this.replyUserNotFound(interaction);
 
         let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
             interaction.guildId as string, userID
         );
         if(entityUserPunishment.timeMuteVoiceStart === null)
-            return await this.replyUserNotPunished(interaction);
+            return this.replyUserNotPunished(interaction);
         entityUserPunishment.timeMuteVoiceStart = null;
         entityUserPunishment.timeMuteVoiceEnd = null;
         entityUserPunishment.reasonMuteVoice = null;
-        await this.databaseServiceUserPunishment.insert(entityUserPunishment);
+        this.databaseServiceUserPunishment.insert(entityUserPunishment);
         let roleID: string = await this.getOneSettingString(interaction, "MODERATION_ROLE_MUTE_VOICE_ID");
-        await this.removeRole(member, roleID);
+        this.removeRole(member, roleID);
 
         let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
             "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_FIELD_USER_TITLE",
@@ -844,17 +844,17 @@ export class ModerationService extends ModuleBaseService {
             (reason === "") ? textStrings[3] : reason, textStrings[4],
             interaction.user
         );
-        await interaction.reply({embeds: embed});
-        await this.trySendToModerationChannel(interaction, embed);
+        interaction.reply({embeds: embed});
+        this.trySendToModerationChannel(interaction, embed);
         if(await this.getOneSettingNumber(entityUserPunishment.guildID, "MODERATION_NOTIFICATION_UNMUTE_VOICE")) {
             let textStrings: string[] = await this.getManyText(entityUserPunishment.guildID, [
                 "MODERATION_UNMUTE_VOICE_TITLE", "MODERATION_PM_NOTIFICATION",
             ], [null, [`${interaction.member?.user.username as string}#${interaction.member?.user.discriminator as string}`]]);
-            await UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
+            UtilsServicePM.send(entityUserPunishment.userID, this.moderationUI.riddancePMEmbed(
                 textStrings[0], textStrings[1], 
                 interaction.guild?.name as string, interaction.guild?.iconURL()
             ));
         }
-        await ModerationService.updatePunishmentTimeout();
+        ModerationService.updatePunishmentTimeout();
     }
 }

@@ -15,10 +15,10 @@ export abstract class RolesInteractions {
             required: true,
         }) rolesID: string,
         interaction: CommandInteraction
-    ) { await this.rolesService.roles(interaction, rolesID); }
+    ) { this.rolesService.roles(interaction, rolesID); }
 
     @ButtonComponent({id: /roles-\d+/})
     public async roleButton(
         interaction: ButtonInteraction
-    ) { await this.rolesService.roleButton(interaction); }
+    ) { this.rolesService.roleButton(interaction); }
 }

@@ -46,12 +46,10 @@ export class DiscordService extends ModuleBaseService {
         ]);
         for(let channel of guild.channels.cache.values()) {
             try {
-                if(channel.type === ChannelType.GuildText) {
-                    await (channel as TextChannel).send({
+                if(channel.type === ChannelType.GuildText) 
+                    return (channel as TextChannel).send({
                         embeds: this.discordUI.onGuildCreate(textStrings[0], textStrings[1])
                     });
-                    return;
-                }
             } catch {}
         }
     }
@@ -60,6 +58,6 @@ export class DiscordService extends ModuleBaseService {
         let textStrings: string[] = await this.getManyText(interaction.guild?.id as string, [
             "DISCORD_ON_GUILD_CREATE_TITLE", "DISCORD_ON_GUILD_CREATE_DESCRIPTION"
         ]);
-        await interaction.reply({embeds: this.discordUI.onGuildCreate(textStrings[0], textStrings[1])});
+        interaction.reply({embeds: this.discordUI.onGuildCreate(textStrings[0], textStrings[1])});
     }
 }
