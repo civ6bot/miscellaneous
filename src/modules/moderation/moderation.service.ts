@@ -2,7 +2,6 @@ import {ButtonInteraction, CommandInteraction, EmbedBuilder, Guild, GuildMember,
 import {ModuleBaseService} from "../base/base.service";
 import {ModerationUI} from "./moderation.ui";
 import {DatabaseServiceUserPunishment} from "../../database/services/service.UserPunishment";
-import {UtilsServiceUsers} from "../../utils/services/utils.service.users";
 import {EntityUserPunishment} from "../../database/entities/entity.UserPunishment";
 import {discordClient} from "../../client/client";
 import {UtilsServiceTime} from "../../utils/services/utils.service.time";
@@ -181,16 +180,6 @@ export class ModerationService extends ModuleBaseService {
             }
         }
         databaseServiceUserPunishment.insert(changedEntitiesUserPunishment);
-    }
-
-    private async isModerator(interaction: CommandInteraction | ButtonInteraction): Promise<boolean> {
-        let member: GuildMember = interaction.member as GuildMember;
-        if(UtilsServiceUsers.isAdmin(member))
-            return true;
-        let moderationRolesID: string[] = (await this.getOneSettingString(
-            interaction, "MODERATION_ROLE_MODERATORS_ID"
-        )).split(" ");
-        return member.roles.cache.some((value, key) => (moderationRolesID.indexOf(key) !== -1));
     }
 
     private async replyNoPermission(interaction: CommandInteraction | ButtonInteraction): Promise<void> {
@@ -472,9 +461,7 @@ export class ModerationService extends ModuleBaseService {
         ], [
             null, [entityUsersBanTier.length]
         ]);
-        let emojis: string[] = await this.getManySettingString(interaction,
-            "BASE_EMOJI_YES", "BASE_EMOJI_NO"
-        );
+        let emojis: string[] = ["<:Yes:808418109710794843>", "<:No:808418109319938099>"];
         interaction.reply({
             embeds: this.moderationUI.notify(textStrings[0], textStrings[1]),
             components: this.moderationUI.banTierResetAllButtons(
@@ -601,24 +588,20 @@ export class ModerationService extends ModuleBaseService {
             });
         }
 
-        interaction.deferReply({ephemeral: true});
-        let channel: TextChannel = interaction.channel as TextChannel;
-        let fetchedMessages = await channel.messages.fetch({limit: clearAmount});
-        let fetchedMessagesAmount: number = Array.from(fetchedMessages.keys()).length;
+        await interaction.deferReply({ephemeral: true});
         try {
-            channel.bulkDelete(fetchedMessages);
+            let channel: TextChannel = interaction.channel as TextChannel;
+            let fetchedMessages = await channel.messages.fetch({limit: clearAmount});
+            let fetchedMessagesAmount: number = Array.from(fetchedMessages.keys()).length;
+            await channel.bulkDelete(fetchedMessages);
+            let title: string = await this.getOneText(interaction, "MODERATION_CLEAR_TITLE", fetchedMessagesAmount);
+            await interaction.editReply({embeds: this.moderationUI.clearEmbed(title)});
         } catch {
             let textStrings: string[] = await this.getManyText(interaction, [
                 "BASE_ERROR_TITLE", "MODERATION_ERROR_BOT_NO_PERMISSION"
             ], [null, [clearAmountMax]]);
-            return interaction.reply({
-                embeds: this.moderationUI.error(textStrings[0], textStrings[1]),
-                ephemeral: true
-            });
+            return interaction.editReply({embeds: this.moderationUI.error(textStrings[0], textStrings[1])});
         }
-
-        let title: string = await this.getOneText(interaction, "MODERATION_CLEAR_TITLE", fetchedMessagesAmount);
-        interaction.editReply({embeds: this.moderationUI.clearEmbed(title)});
     }
 
     public async muteVoice(

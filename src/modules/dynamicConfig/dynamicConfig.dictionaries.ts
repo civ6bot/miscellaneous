@@ -1,8 +1,4 @@
-import {
-    JSONDynamicConfigEntityBoolean, JSONDynamicConfigEntityBooleanGameSetting, JSONDynamicConfigEntityChannelMany,
-    JSONDynamicConfigEntityNumber, JSONDynamicConfigEntityNumberMany, JSONDynamicConfigEntityRoleMany,
-    JSONDynamicConfigEntityString, JSONDynamicConfigEntityTeamersForbiddenPairs
-} from "../../types/type.JSON.DynamicConfigEntities";
+import { DynamicConfigEntity } from "./dynamicConfig.models";
 
 export const tagsMap: Map<string, string[]> = new Map<string, string[]>([
     ["DYNAMIC_CONFIG_TITLE", [
@@ -11,15 +7,7 @@ export const tagsMap: Map<string, string[]> = new Map<string, string[]>([
     ]],
 ]);
 
-export const configsMap = new Map<string, (JSONDynamicConfigEntityNumber
-    |JSONDynamicConfigEntityString
-    |JSONDynamicConfigEntityBoolean
-    |JSONDynamicConfigEntityTeamersForbiddenPairs
-    |JSONDynamicConfigEntityBooleanGameSetting
-    |JSONDynamicConfigEntityNumberMany
-    |JSONDynamicConfigEntityRoleMany
-    |JSONDynamicConfigEntityChannelMany
-    )[]>([
+export const configsMap = new Map<string, DynamicConfigEntity[]>([
     ["DYNAMIC_CONFIG_LANGUAGE", []],
     ["DYNAMIC_CONFIG_MODERATION", [
         {

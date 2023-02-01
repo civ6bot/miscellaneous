@@ -1,6 +1,6 @@
 {
   "name": "civ6bot-miscellaneous",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Discord bot for Civilization VI game - Miscellaneous",
   "main": "build/index.js",
   "scripts": {
