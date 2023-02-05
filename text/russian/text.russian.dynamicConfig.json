@@ -13,12 +13,9 @@
     { "tag": "DYNAMIC_CONFIG_ERROR_TYPE_NUMBER_MANY", "value": "Введите от [MIN_AMOUNT] до [MAX_AMOUNT] целых чисел в диапазоне от от [MIN_VALUE] до [MAX_VALUE]." },
     { "tag": "DYNAMIC_CONFIG_ERROR_TYPE_ROLE_MANY", "value": "Введите от [MIN_AMOUNT] до [MAX_AMOUNT] ролей или ID ролей." },
     { "tag": "DYNAMIC_CONFIG_ERROR_TYPE_CHANNEL_MANY", "value": "Введите от [MIN_AMOUNT] до [MAX_AMOUNT] каналов или ID каналов." },
+    { "tag": "DYNAMIC_CONFIG_ERROR_TYPE_EMOJI", "value": "Введите название эмодзи вместе с его ID. Чтобы получить данные, напишите символ бэкслеша (\"\\\\\") перед эмодзи." },
 
     { "tag": "DYNAMIC_CONFIG_BUTTON_BACK", "value": "Назад" },
-    { "tag": "DYNAMIC_CONFIG_BUTTON_FIRST", "value": "На первую страницу" },
-    { "tag": "DYNAMIC_CONFIG_BUTTON_PREVIOUS", "value": "Пред. страница" },
-    { "tag": "DYNAMIC_CONFIG_BUTTON_NEXT", "value": "След. страница" },
-    { "tag": "DYNAMIC_CONFIG_BUTTON_LAST", "value": "На последнюю страницу" },
     { "tag": "DYNAMIC_CONFIG_BUTTON_RESET", "value": "Сбросить настройки" },
     { "tag": "DYNAMIC_CONFIG_BUTTON_DELETE", "value": "Удалить сообщение" },
 
@@ -33,7 +30,6 @@
     { "tag": "DYNAMIC_CONFIG_NOTIFY_RESET_SUCCESS", "value": "Настройки были успешно сброшены." },
 
     { "tag": "DYNAMIC_CONFIG_TITLE", "value": "Конфигурация сервера" },
-    { "tag": "DYNAMIC_CONFIG_TITLE_EMOJI", "value": "\uD83D\uDD27" },
     { "tag": "DYNAMIC_CONFIG_TITLE_PAGE", "value": "страница" },
     { "tag": "DYNAMIC_CONFIG_CHOOSE_GROUP_DESCRIPTION", "value": "Выберите категорию настроек из списка в меню." },
     { "tag": "DYNAMIC_CONFIG_CHOOSE_CONFIG_DESCRIPTION", "value": "Выберите настройку, которую вы хотите изменить, из списка в меню." },
@@ -44,44 +40,29 @@
 
 
     { "tag": "DYNAMIC_CONFIG_LANGUAGE", "value": "Выбор языка" },
-    { "tag": "DYNAMIC_CONFIG_LANGUAGE_EMOJI", "value": "\uD83C\uDF0D" },
 
 
     { "tag": "DYNAMIC_CONFIG_MODERATION", "value": "Модерация" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_EMOJI", "value": "\uD83D\uDD28" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID", "value": "Роли модераторов (ID)" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID_EMOJI", "value": "⚙" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID", "value": "Канал для отчётов о наказаниях (ID)" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID_EMOJI", "value": "⚙" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_BAN_ID", "value": "Роль для бана (ID)" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_BAN_ID_EMOJI", "value": "\uD83D\uDD28" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIERS", "value": "Время уровней банов, дней" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIERS_EMOJI", "value": "\uD83D\uDD28" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIER_DECREASE_DAYS", "value": "Время автоматического уменьшения уровня бана, дней" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIER_DECREASE_DAYS_EMOJI", "value": "\uD83D\uDD28" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_CHAT_ID", "value": "Роль для мута текстовых каналов (ID)" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_CHAT_ID_EMOJI", "value": "\uD83D\uDDE8" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_VOICE_ID", "value": "Роль для мута голосовых каналов (ID)" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_VOICE_ID_EMOJI", "value": "\uD83D\uDD08" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX", "value": "Количество сообщений для команды /clear" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX_EMOJI", "value": "\uD83D\uDDD1" },
 
 
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS", "value": "Оповещения в ЛС" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_EMOJI", "value": "📲" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNBAN", "value": "Разбан" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNBAN_EMOJI", "value": "📲" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_CHAT", "value": "Разблокировка текстовых каналов" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_CHAT_EMOJI", "value": "📲" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_VOICE", "value": "Разблокировка голосовых каналов" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_VOICE_EMOJI", "value": "📲" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON", "value": "Команда /pardon" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON_EMOJI", "value": "📲" }
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON", "value": "Команда /pardon" }
   ]
 }
