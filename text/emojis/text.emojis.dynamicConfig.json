@@ -1,0 +1,32 @@
+{
+  "lang": "English",
+  "text": [
+    { "tag": "DYNAMIC_CONFIG_TITLE_EMOJI", "value": "\uD83D\uDD27" },
+
+    { "tag": "DYNAMIC_CONFIG_LANGUAGE_EMOJI", "value": "\uD83C\uDF0D" },
+
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_EMOJI", "value": "\uD83D\uDD28" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID_EMOJI", "value": "⚙" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID_EMOJI", "value": "⚙" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_BAN_ID_EMOJI", "value": "\uD83D\uDD28" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIERS_EMOJI", "value": "\uD83D\uDD28" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIER_DECREASE_DAYS_EMOJI", "value": "\uD83D\uDD28" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_CHAT_ID_EMOJI", "value": "\uD83D\uDDE8" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MUTE_VOICE_ID_EMOJI", "value": "\uD83D\uDD08" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_CLEAR_MAX_EMOJI", "value": "\uD83D\uDDD1" },
+
+
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_EMOJI", "value": "📲" },
+
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNBAN_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_CHAT_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_UNMUTE_VOICE_EMOJI", "value": "📲" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_NOTIFICATIONS_PARDON_EMOJI", "value": "📲" }
+  ]
+}
