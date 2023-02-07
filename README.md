@@ -2,7 +2,7 @@
 
 **Civ6Bot Miscellaneous** has fun and unnecessary commands: moderation (ban, mute, clear text channel), fun images, and other things. You can use it standalone or with other [Civ6Bot project](https://github.com/civ6bot/) Discord bots.
 <br>
-Current version: `1.1.1` (Major architecture update).
+Current version: `1.1.2` (Major architecture update).
 You can [invite](https://discord.com/api/oauth2/authorize?client_id=963038599304065084&permissions=139872037953&scope=bot) bot to your Discord server.
 <p align="center">
     <img src="./images/miscellaneous.png"  width="250" height="250">
