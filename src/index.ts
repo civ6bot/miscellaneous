@@ -34,13 +34,18 @@ localDataSource.initialize().then(async () => {
 outerDataSource.initialize().then(async () => {
     console.log(`Outer database connected`);
 
-    // midnight function
+    // В полночь понижать уровни банов
     setTimeout(async () => {
         await ModerationService.banTierDecreaseTimeout();
         setInterval(ModerationService.banTierDecreaseTimeout, UtilsServiceTime.getMs(1, "d"));
     }, new Date().setHours(0, 0, 0, 0)+UtilsServiceTime.getMs(1, "d")-Date.now());
 
-    await ModerationService.punishmentTimeout();
+    // Каждую минуту поднимать очередь на разбан
+    // (потому что работает плохо)
+    setTimeout(async () => {
+        await ModerationService.punishmentTimeout();
+    }, 60*1000);
+    
     console.log("Moderation service timeouts initialized")
 });
 
