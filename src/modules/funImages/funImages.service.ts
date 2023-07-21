@@ -22,7 +22,7 @@ export class FunImagesService extends ModuleBaseService {
             ]);
             return interaction.reply({embeds: this.funImagesUI.error(textStrings[0], textStrings[1]), ephemeral: true});
         }
-        let title: string = await this.getOneText(interaction, "FUN_IMAGES_AVATAR_TITLE", currentMember.user.tag);
+        let title: string = await this.getOneText(interaction, "FUN_IMAGES_AVATAR_TITLE", currentMember.user.username);
         interaction.reply({embeds: this.funImagesUI.avatar(title, imageURL)});
     }
 

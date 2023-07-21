@@ -42,11 +42,11 @@ outerDataSource.initialize().then(async () => {
 
     // Каждую минуту поднимать очередь на разбан
     // (потому что работает плохо)
-    setTimeout(async () => {
+    setInterval(async () => {
         await ModerationService.punishmentTimeout();
-    }, 60*1000);
+    }, UtilsServiceTime.getMs(1, "m"));
     
-    console.log("Moderation service timeouts initialized")
+    console.log("Moderation service timeouts initialized");
 });
 
 process.on('uncaughtException', error => {
