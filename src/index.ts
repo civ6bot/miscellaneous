@@ -1,6 +1,6 @@
 import {importx} from "@discordx/importer";
 import {discordClient} from "./client/client";
-import {localDataSource, outerDataSource} from "./database/database.datasources";
+import {dataSource} from "./database/database.datasource";
 import {DatabaseServiceText} from "./database/services/service.Text";
 import {loadTextEntities} from "./utils/loaders/utils.loader.text";
 import {DatabaseServiceConfig} from "./database/services/service.Config";
@@ -12,41 +12,48 @@ dotenv.config({path: 'miscellaneous.env'});
 
 importx(
     __dirname + "/modules/*/*.interactions.{js,ts}",
-).then(() => {
-    discordClient.login(((process.env.TEST_MODE === '1') ? process.env.TEST_BOT_TOKEN : process.env.BOT_TOKEN) as string).then(() => {
-        console.log((process.env.TEST_MODE === '1') ? "Civilization VI – Test started" : "Civilization VI – Miscellaneous started");
-    });
+).then(async () => {
+    await discordClient.login(((process.env.TEST_MODE === '1') 
+        ? process.env.TEST_BOT_TOKEN 
+        : process.env.BOT_TOKEN
+    ) as string);
+    console.log((process.env.TEST_MODE === '1') 
+        ? "Civ6Bot Test started" 
+        : "Civ6Bot Miscellaneous started"
+    );
 });
 
-localDataSource.initialize().then(async () => {
+dataSource.initialize().then(async () => {
     let databaseServiceText: DatabaseServiceText = new DatabaseServiceText();
     let databaseServiceConfig: DatabaseServiceConfig = new DatabaseServiceConfig();
-
-    await databaseServiceText.clearAll();
-    await databaseServiceConfig.clearAll();
 
     await databaseServiceText.insertAll(loadTextEntities());
     await databaseServiceConfig.insertAll(loadDefaultConfigs());
 
-    console.log(`Local database started`);
-});
+    console.log(`Database connected`);
 
-outerDataSource.initialize().then(async () => {
-    console.log(`Outer database connected`);
-
-    // В полночь понижать уровни банов
+    // В полночь понижать уровни банов.
+    // Сначала подождать до полуночи,
+    // потом каждые 24 часа, начиная с полуночи.
     setTimeout(async () => {
         await ModerationService.banTierDecreaseTimeout();
         setInterval(ModerationService.banTierDecreaseTimeout, UtilsServiceTime.getMs(1, "d"));
     }, new Date().setHours(0, 0, 0, 0)+UtilsServiceTime.getMs(1, "d")-Date.now());
 
-    // Каждую минуту поднимать очередь на разбан
-    // (потому что работает плохо)
-    setTimeout(async () => {
+    // Каждую минуту поднимать очередь на разбан, потому что работает плохо.
+    // Здесь не будет многократно растущего одновременного
+    // вызова одной и той же функции, потому что вызов следующий:
+    //
+    // setInterval > punishmentTimeout > { ... DB changes ... } >
+    // > updatePunishmentTimeout > clearTimeout >
+    // > if(nextTime !== null) setTimeout > punishmentTimeout > ...
+    //
+    // В результате обновляется время следующего вызова punishmentTimeout.
+    setInterval(async () => {
         await ModerationService.punishmentTimeout();
     }, 60*1000);
     
-    console.log("Moderation service timeouts initialized")
+    console.log("Moderation service initialized");
 });
 
 process.on('uncaughtException', error => {

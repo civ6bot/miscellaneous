@@ -1,9 +1,9 @@
 import {EntityUserPunishment} from "../entities/entity.UserPunishment";
 import {EntityManager, IsNull, LessThanOrEqual, MoreThan, Not} from "typeorm";
-import {outerDataSource} from "../database.datasources";
+import {dataSource} from "../database.datasource";
 
 export class DatabaseServiceUserPunishment {
-    protected database: EntityManager = outerDataSource.manager;
+    protected database: EntityManager = dataSource.manager;
 
     private async create(guildID: string, userID: string): Promise<EntityUserPunishment> {
         let newEntity: EntityUserPunishment = new EntityUserPunishment();

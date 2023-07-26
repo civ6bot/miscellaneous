@@ -8,8 +8,8 @@
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_EMOJI", "value": "\uD83D\uDD28" },
 
-    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID_EMOJI", "value": "⚙" },
-    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID_EMOJI", "value": "⚙" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_MODERATORS_ID_EMOJI", "value": "⚙️" },
+    { "tag": "DYNAMIC_CONFIG_MODERATION_CHANNEL_ID_EMOJI", "value": "⚙️" },
 
     { "tag": "DYNAMIC_CONFIG_MODERATION_ROLE_BAN_ID_EMOJI", "value": "\uD83D\uDD28" },
     { "tag": "DYNAMIC_CONFIG_MODERATION_BAN_TIERS_EMOJI", "value": "\uD83D\uDD28" },
