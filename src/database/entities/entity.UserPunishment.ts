@@ -16,20 +16,20 @@ export class EntityUserPunishment {
     timeBanStart!: Date | null;
     @Column({type: "timestamp", nullable: true, default: null})
     timeBanEnd!: Date | null;
-    @Column({type: "text", charset: "utf8mb4", nullable: true, default: null})
+    @Column({type: "text", nullable: true, default: null})
     reasonBan!: string | null;
 
     @Column({type: "timestamp", nullable: true, default: null})
     timeMuteChatStart!: Date | null;
     @Column({type: "timestamp", nullable: true, default: null})
     timeMuteChatEnd!: Date | null;
-    @Column({type: "text", charset: "utf8mb4", nullable: true, default: null})
+    @Column({type: "text", nullable: true, default: null})
     reasonMuteChat!: string | null;
 
     @Column({type: "timestamp", nullable: true, default: null})
     timeMuteVoiceStart!: Date | null;
     @Column({type: "timestamp", nullable: true, default: null})
     timeMuteVoiceEnd!: Date | null;
-    @Column({type: "text", charset: "utf8mb4", nullable: true, default: null})
+    @Column({type: "text", nullable: true, default: null})
     reasonMuteVoice!: string | null;
 }

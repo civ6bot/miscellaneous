@@ -1,6 +1,6 @@
 {
   "name": "civ6bot-miscellaneous",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Discord bot for Civilization VI game - Miscellaneous",
   "main": "build/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "dotenv": "^16.0.3",
     "emoji-regex": "^10.2.1",
     "glob": "^8.0.3",
-    "mysql": "^2.18.1",
+    "pg": "^8.11.1",
     "sqlite3": "^5.1.2",
     "typeorm": "^0.3.11",
     "typescript": "^4.9.4"
