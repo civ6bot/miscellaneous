@@ -840,4 +840,52 @@ export class ModerationService extends ModuleBaseService {
         }
         ModerationService.updatePunishmentTimeout();
     }
+
+    public async banProfile(interaction: CommandInteraction, member: GuildMember|null = null) {
+        if(member === null)
+            member = interaction.member as GuildMember;
+        let entityUserPunishment: EntityUserPunishment = await this.databaseServiceUserPunishment.getOne(
+            interaction.guild?.id as string,
+            member.id
+        );
+        let maxTierLevel: number = (await this.getOneSettingString(interaction, "MODERATION_BAN_TIERS")).split(" ").length;
+        let hasActivePunishments: boolean = Boolean(entityUserPunishment.timeBanEnd || entityUserPunishment.timeMuteChatEnd || entityUserPunishment.timeMuteVoiceEnd)
+
+        let title: string = await this.getOneText(interaction, "MODERATION_BAN_PROFILE_TITLE", member.user.username);
+        let fieldTitles: string[] = await this.getManyText(interaction, [
+            "MODERATION_BAN_PROFILE_FIELD_ACTIVE_TITLE", "MODERATION_BAN_PROFILE_FIELD_BAN_TIER_TITLE"
+        ]);
+        let fieldValueNone: string = await this.getOneText(interaction, "MODERATION_BAN_PROFILE_DESCRIPTION_NONE");
+        let fieldValues: string[] = await this.getManyText(interaction, [
+            "MODERATION_BAN_PROFILE_FIELD_ACTIVE_VALUE", "MODERATION_BAN_PROFILE_FIELD_BAN_TIER_VALUE"
+        ], [
+            [
+                entityUserPunishment.timeBanEnd
+                    ? UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeBanEnd)
+                    : fieldValueNone,
+                entityUserPunishment.timeMuteChatEnd
+                    ? UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeMuteChatEnd)
+                    : fieldValueNone,
+                entityUserPunishment.timeMuteVoiceEnd
+                    ? UtilsGeneratorTimestamp.getFormattedDate(entityUserPunishment.timeMuteVoiceEnd)
+                    : fieldValueNone,
+            ],
+            [
+                entityUserPunishment.banTier,
+                maxTierLevel
+            ]
+        ]);
+        let bottomText: string = await this.getOneText(interaction, "MODERATION_BOTTOM_AUTHOR");
+        
+        interaction.reply({embeds: this.moderationUI.banProfile(
+            title,
+            fieldTitles,
+            fieldValues,
+            bottomText,
+            member.user,
+            hasActivePunishments,
+            interaction.user,
+            await this.isModerator(interaction)
+        )});
+    }
 }

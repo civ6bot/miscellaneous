@@ -109,6 +109,17 @@ export abstract class ModerationInteractions{
     async banTierResetAllButtonCancel(
         interaction: ButtonInteraction
     ) { this.moderationService.banTierResetAllButtonCancel(interaction) }
+
+    @Slash({name: "ban-profile", description: "Check ban status of user"})
+    async banProfile(
+        @SlashOption({
+            name: "user",
+            description: "user to check status",
+            type: ApplicationCommandOptionType.User,
+            required: false,
+        }) member: GuildMember|null = null,
+        interaction: CommandInteraction
+    ) { this.moderationService.banProfile(interaction, member) }
 }
 
 @Discord()

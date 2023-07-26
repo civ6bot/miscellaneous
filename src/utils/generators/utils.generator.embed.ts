@@ -43,7 +43,7 @@ export class UtilsGeneratorEmbed {
                 .setImage(largeImageUrlArray[i] || null)
             for(let j in fieldsArray[i])
                 if((fieldsArray[i][j].name !== "") && (fieldsArray[i][j].value !== ""))
-                    embedBuilder.addFields({name: fieldsArray[i][j].name, value: fieldsArray[i][j].value, inline: true});
+                    embedBuilder.addFields({name: fieldsArray[i][j].name, value: fieldsArray[i][j].value, inline: fieldsArray[i][j].inline ?? true});
             embedBuilderArray.push(embedBuilder);
         }
         if(signBottomText !== null)

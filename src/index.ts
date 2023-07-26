@@ -51,7 +51,7 @@ dataSource.initialize().then(async () => {
     // В результате обновляется время следующего вызова punishmentTimeout.
     setInterval(async () => {
         await ModerationService.punishmentTimeout();
-    }, 60*1000);
+    }, UtilsServiceTime.getMs(1, "m"));
     
     console.log("Moderation service initialized");
 });

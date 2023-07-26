@@ -20,7 +20,7 @@ export class ModerationUI extends ModuleBaseUI {
                 { name: fieldDurationOrChangeTitle, value: fieldDurationOrChangeDescription },
                 { name: fieldReasonTitle, value: fieldReasonDescription },
             ],
-            `${moderatorBottomText} ${author.tag}`,
+            `${moderatorBottomText} ${author.username}`,
             author.avatarURL()
         );
     }
@@ -42,7 +42,7 @@ export class ModerationUI extends ModuleBaseUI {
             "#9FCFF9",
             null,
             fields,
-            author ? `${bottomText} ${author.tag}` : bottomText,
+            author ? `${bottomText} ${author.username}` : bottomText,
             author?.avatarURL() || null
         );
     }
@@ -71,6 +71,27 @@ export class ModerationUI extends ModuleBaseUI {
             emojis,
             [ButtonStyle.Success, ButtonStyle.Danger],
             ["moderation-ban-tier-reset-all-confirm",  "moderation-ban-tier-reset-all-cancel"]
+        );
+    }
+
+    public banProfile(
+        title: string,
+        fieldTitles: string[], fieldValues: string[],
+        bottomText: string,
+
+        member: User,
+        hasActivePunishments: boolean,
+        author: User,
+        isModerator: boolean = false,
+    ): EmbedBuilder[] {
+        return UtilsGeneratorEmbed.getSingle(
+            title,
+            (hasActivePunishments) ? "#F4900C" : "#5865F2",
+            null,
+            fieldTitles.map((_, index) => {return {name: fieldTitles[index], value: fieldValues[index], inline: false}}),
+            isModerator ? `${bottomText} ${author.username}` : author.username,
+            author.avatarURL(),
+            member.avatarURL()
         );
     }
 }

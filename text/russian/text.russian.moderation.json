@@ -49,6 +49,13 @@
 
     { "tag": "MODERATION_PM_NOTIFICATION", "value": "Ваше наказание было снято модератором [MODERATOR_TAG]." },
     { "tag": "MODERATION_PM_NOTIFICATION_PARDON", "value": "Все ваши ограничения были сняты модератором [MODERATOR_TAG]." },
-    { "tag": "MODERATION_PM_NOTIFICATION_TIMEOUT", "value": "Время вашего наказания истекло." }
+    { "tag": "MODERATION_PM_NOTIFICATION_TIMEOUT", "value": "Время вашего наказания истекло." },
+
+    { "tag": "MODERATION_BAN_PROFILE_TITLE", "value": "🔨 Бан-профиль [USER_NAME]" },
+    { "tag": "MODERATION_BAN_PROFILE_FIELD_ACTIVE_TITLE", "value": "🕒 Действующие наказания" },
+    { "tag": "MODERATION_BAN_PROFILE_FIELD_ACTIVE_VALUE", "value": "Бан: [BAN_DATE].\nБлокировка текстовых каналов: [MUTE_TEXT_DATE].\nБлокировка голосовых каналов: [MUTE_VOICE_DATE]." },
+    { "tag": "MODERATION_BAN_PROFILE_FIELD_BAN_TIER_TITLE", "value": "✏️ Уровень бана" },
+    { "tag": "MODERATION_BAN_PROFILE_FIELD_BAN_TIER_VALUE", "value": "[BAN_TIER_CURRENT]/[BAN_TIER_TOTAL]" },
+    { "tag": "MODERATION_BAN_PROFILE_DESCRIPTION_NONE", "value": "нет" }
   ]
 }
