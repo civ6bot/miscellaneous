@@ -491,7 +491,7 @@ export class ModerationService extends ModuleBaseService {
     public async banTierResetAllButtonCancel(interaction: ButtonInteraction) {
         if(!await this.isModerator(interaction))
             return this.replyNoPermission(interaction);
-        interaction.message.delete();
+        interaction.message.delete().catch();
     }
 
     public async pardon(interaction: CommandInteraction, member: GuildMember, reason: string) {
