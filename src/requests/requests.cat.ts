@@ -8,6 +8,6 @@ export class RequestsCat {
     @SafeRequest
     public async getCatURL(): Promise<string|null>{
         let {data, status} = await axios.get<JSONCat>(this.randomCatURL + "/cat?json=true");
-        return this.randomCatURL + data.url;
+        return this.randomCatURL + data._id;
     }
 }

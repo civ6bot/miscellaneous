@@ -1,3 +1,3 @@
 export type JSONCat = {
-    url: string,
+    _id: string,
 }
