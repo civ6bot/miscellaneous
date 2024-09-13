@@ -11,7 +11,7 @@ import { DynamicConfigUI } from "./dynamicConfig.ui";
 export class DynamicConfigService extends ModuleBaseService {
     private dynamicConfigUI: DynamicConfigUI = new DynamicConfigUI();
 
-    private entitiesPerPage: number = 6;
+    private entitiesPerPage: number = 10;
 
     private isOwner(interaction: ButtonInteraction | StringSelectMenuInteraction): boolean {
         return interaction.customId.split("-").filter(str => str === interaction.user.id).length > 0;
@@ -260,7 +260,7 @@ export class DynamicConfigService extends ModuleBaseService {
                 }});
                 break;
             default:
-                dynamicConfigEntities = configsMap.get(dynamicConfigTag) ?? [];
+                dynamicConfigEntities = JSON.parse(JSON.stringify(configsMap.get(dynamicConfigTag) ?? [])) as DynamicConfigEntity[];
         }
         await this.updateDynamicConfigValues(interaction, dynamicConfigEntities);
         await this.updateDynamicConfigStringifiedValues(interaction, dynamicConfigEntities);
@@ -389,16 +389,17 @@ export class DynamicConfigService extends ModuleBaseService {
                     .filter(str => str.length)
                     .map(str => Number(str));
                 if(
-                    valueNumbers.every(valueNumber => (valueNumber >= (dynamicConfigEntity.minValue ?? 0)) && (valueNumber <= (dynamicConfigEntity.maxValue ?? Infinity))) &&
                     (valueNumbers.length >= (dynamicConfigEntity.minAmount ?? 0)) &&
-                    (valueNumbers.length <= (dynamicConfigEntity.maxAmount ?? Infinity))
-                ) 
+                    (valueNumbers.length <= (dynamicConfigEntity.maxAmount ?? Infinity)) &&
+                    valueNumbers.every(valueNumber => (valueNumber >= (dynamicConfigEntity.minValue ?? 0)) && (valueNumber <= (dynamicConfigEntity.maxValue ?? Infinity)))
+                ) {
                     dynamicConfigEntity.value = valueNumbers.join(" ");
-                else 
-                    dynamicConfigEntity.errorText = await this.getOneText(interaction, "DYNAMIC_CONFIG_ERROR_TYPE_NUMBER", 
+                } else {
+                    dynamicConfigEntity.errorText = await this.getOneText(interaction, "DYNAMIC_CONFIG_ERROR_TYPE_NUMBER_MANY", 
                         dynamicConfigEntity.minAmount ?? 0, dynamicConfigEntity.maxAmount ?? Infinity,
                         dynamicConfigEntity.minValue ?? 0, dynamicConfigEntity.maxValue ?? Infinity
                     );
+                }
                 break;
             case "RoleMany":
                 let valueRoles: string[] = stringifiedValue.replaceAll(/[<@&>,]/g, " ")
